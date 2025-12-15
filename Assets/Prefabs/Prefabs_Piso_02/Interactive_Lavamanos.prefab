@@ -351,12 +351,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 8080871716054656645}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0906e2c188168a41b9ce797ea399bed, type: 3}
+  m_Script: {fileID: 11500000, guid: 11f361e77b736cb4cb46afa7db685a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agua_Chorro: {fileID: 0}
   mensaje_Secreto: {fileID: 0}
-  panel_interactive: {fileID: 0}
   tiempoReveal: 3
 --- !u!1 &8776202807286598936
 GameObject:
@@ -659,7 +658,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 9113205354645789579}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88bc69e549019034686229c790630d30, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dcb12a3488f614409a9f932bc4d2211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myScr_EspejoController: {fileID: 5165110252634880598}
+  myScr_EspejoController: {fileID: 0}
+  panel_Interactuar: {fileID: 0}

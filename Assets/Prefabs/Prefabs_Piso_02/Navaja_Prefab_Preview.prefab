@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1049779214493799676}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.2, y: 0, z: 0}
+  m_LocalPosition: {x: 0.2, y: 0.3, z: 0}
   m_LocalScale: {x: 0.63092285, y: 0.5250338, z: 0.6818}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -81,8 +81,8 @@ Transform:
   m_GameObject: {fileID: 6740528914487179402}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25767788, y: 0.25, z: 0.25767788}
+  m_LocalPosition: {x: 0, y: 0.125, z: 0}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1540196932787443245}
@@ -173,7 +173,7 @@ GameObject:
   m_Layer: 0
   m_Name: Navaja_Prefab_Preview
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
