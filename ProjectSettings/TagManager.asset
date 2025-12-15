@@ -7,6 +7,7 @@ TagManager:
   - Glass
   - Agua
   - Jabon
+  - Panel_Interactuar
   layers:
   - Default
   - TransparentFX

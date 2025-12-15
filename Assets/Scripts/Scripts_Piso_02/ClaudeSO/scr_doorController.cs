@@ -4,7 +4,7 @@ using UnityEngine;
 //Este es un ejemplo de una puerta que se abrirá en caso de que el jugador tenga una llave, la idea esque sirva de ejemplo para crear los otros objetos que requieren de otro para usarse.
 // Ejemplo: Llave = abrir Puerta
 [RequireComponent(typeof(Collider))]
-public class Door : MonoBehaviour
+public class scr_doorController : MonoBehaviour
 {
     [Header("Requerimientos")]
     [SerializeField] private scr_ItemData ItemNecesario; // La llave necesaria
@@ -24,8 +24,8 @@ public class Door : MonoBehaviour
     [SerializeField] private string openAnimationTrigger = "Open";
 
     private Transform playerTransform;
-    private bool enRango = false;
-    private bool isOpen = false;
+    internal bool enRango = false;
+    internal bool isOpen = false;
     private float mensajeTimer = 0f;
 
     void Start()
@@ -71,21 +71,6 @@ public class Door : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player") && !isOpen)
-        {
-            enRango = true;
-        }
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            enRango = false;
-        }
-    }
 
  
     // Intenta abrir la puerta
@@ -124,6 +109,7 @@ public class Door : MonoBehaviour
         else
         {
             // Si no hay animación, simplemente desactivar
+
             gameObject.SetActive(false);
         }
 
@@ -148,7 +134,7 @@ public class Door : MonoBehaviour
   /*  void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, distancia_interactuar);
+        Gizmos.DrawWireSphere(transfrm.position, distancia_interactuar);
     }
   */
 }

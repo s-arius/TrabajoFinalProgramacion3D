@@ -356,7 +356,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agua_Chorro: {fileID: 0}
   mensaje_Secreto: {fileID: 0}
-  tiempoReveal: 3
 --- !u!1 &8776202807286598936
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,7 +604,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5657103393609537308}
   - component: {fileID: 7159879686291245696}
-  - component: {fileID: 665494240383140208}
+  - component: {fileID: 7734862199052963257}
   m_Layer: 0
   m_Name: Espejo_Trigger
   m_TagString: Untagged
@@ -649,7 +648,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &665494240383140208
+--- !u!114 &7734862199052963257
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

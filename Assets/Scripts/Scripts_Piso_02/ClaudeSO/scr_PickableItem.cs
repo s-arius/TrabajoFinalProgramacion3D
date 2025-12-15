@@ -63,9 +63,8 @@ public class PickableItem : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Recoge el objeto y activa el modo investigación
-    /// </summary>
+   
+    // Recoge el objeto y activa el modo investigación
     void PickUp()
     {
         // Añadir al inventario

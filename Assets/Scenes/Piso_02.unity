@@ -198,9 +198,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8080871716054656645, guid: be4e93370f0593b4794393c89b0def4d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 50974013}
-    - targetCorrespondingSourceObject: {fileID: 9113205354645789579, guid: be4e93370f0593b4794393c89b0def4d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1774602155}
     - targetCorrespondingSourceObject: {fileID: 179640509784801693, guid: be4e93370f0593b4794393c89b0def4d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 50974014}
@@ -229,7 +226,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agua_Chorro: {fileID: 0}
   mensaje_Secreto: {fileID: 50974012}
-  tiempoReveal: 3
 --- !u!114 &50974014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,7 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   investigationPoint: {fileID: 778457423}
-  rotationSpeed: 100
+  rotationSpeed: 1000
 --- !u!4 &127043925
 Transform:
   m_ObjectHideFlags: 0
@@ -910,6 +906,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1074463794}
   - component: {fileID: 1074463795}
+  - component: {fileID: 1074463796}
   m_Layer: 0
   m_Name: Door_Trigger
   m_TagString: Untagged
@@ -947,12 +944,26 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1074463796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074463793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4027b2077bf4c804bbbfbbeb5ed73724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myscr_PuertaController: {fileID: 0}
+  panel_Interactuar: {fileID: 1110865184}
 --- !u!1 &1110865184
 GameObject:
   m_ObjectHideFlags: 0
@@ -966,7 +977,7 @@ GameObject:
   - component: {fileID: 1110865186}
   m_Layer: 5
   m_Name: Panel_Interactuar
-  m_TagString: Untagged
+  m_TagString: Panel_Interactuar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1509,25 +1520,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1774602151 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9113205354645789579, guid: be4e93370f0593b4794393c89b0def4d, type: 3}
-  m_PrefabInstance: {fileID: 50974010}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1774602155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1774602151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dcb12a3488f614409a9f932bc4d2211, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myScr_EspejoController: {fileID: 0}
-  panel_Interactuar: {fileID: 1110865184}
 --- !u!1 &1882954591
 GameObject:
   m_ObjectHideFlags: 0

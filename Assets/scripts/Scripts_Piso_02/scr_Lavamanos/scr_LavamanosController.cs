@@ -9,8 +9,6 @@ public class scr_espejoController : MonoBehaviour
     [SerializeField] private GameObject agua_Chorro;
     [SerializeField] private GameObject mensaje_Secreto;
     
-    [Header("Reveal Settings")]
-    [SerializeField] private float tiempoReveal = 3f;
 
     //Config Chorro de agua
     internal bool lavamanos_CanActive = false;

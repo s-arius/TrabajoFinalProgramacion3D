@@ -4,11 +4,13 @@ public class scr_LavamanosTrigger : MonoBehaviour
 {
     
     [SerializeField] private scr_espejoController myScr_EspejoController;
-    [SerializeField] private GameObject panel_Interactuar; //Arrastar en el inspector
+    [SerializeField] private GameObject panel_Interactuar; 
 
     void Start()
     {
         myScr_EspejoController = GetComponentInParent<scr_espejoController>();
+        
+        panel_Interactuar = GameObject.Find("Panel_Interactuar");
 
         if (panel_Interactuar == null) Debug.LogWarning("PanelInteractuar vacio");
 

@@ -22,6 +22,7 @@ public class CrystalEraser : MonoBehaviour
 
     void Start()
     {
+
         cursor = FindObjectOfType<CustomCursor>();
 
         // Crear RenderTexture

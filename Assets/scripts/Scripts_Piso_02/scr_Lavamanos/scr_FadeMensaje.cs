@@ -9,7 +9,7 @@ public class scr_FadeMensaje : MonoBehaviour
     public float duracionFade = 2.0f;
     private Renderer miRenderer;
     private Color colorOriginal;
-    private bool colorGuardado = false;
+    //private bool colorGuardado = false;
 
     void Start()
     {
@@ -17,7 +17,7 @@ public class scr_FadeMensaje : MonoBehaviour
 
         // Guardamos el color original SOLO una vez
         colorOriginal = miRenderer.material.color;
-        colorGuardado = true;
+        //colorGuardado = true;
 
         // 🔹 Hacer el objeto invisible al inicio
         Color c = colorOriginal;
