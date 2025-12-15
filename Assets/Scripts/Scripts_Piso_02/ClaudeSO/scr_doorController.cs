@@ -18,6 +18,8 @@ public class scr_doorController : MonoBehaviour
     [SerializeField] private GameObject panelMensaje;
     [SerializeField] private TextMeshProUGUI text_Mensaje; // Mensaje en pantalla
     [SerializeField] private float messageDuration = 2f;
+    [SerializeField] private GameObject panelInteractuar;
+    [SerializeField] private TextMeshProUGUI text_Interactuar;
 
     [Header("Animación (Opcional)")]
     [SerializeField] private Animator doorAnimator;
@@ -109,32 +111,31 @@ public class scr_doorController : MonoBehaviour
         else
         {
             // Si no hay animación, simplemente desactivar
-
             gameObject.SetActive(false);
+           
         }
+
 
         Debug.Log("¡Puerta abierta!");
     }
 
     // Muestra un mensaje temporal en pantalla
-    void ShowMessage(string message)
+    void ShowMessage(string mensaje)
     {
         if (text_Mensaje != null)
         {
             panelMensaje.gameObject.SetActive(true);
-            text_Mensaje.text = message;
+            text_Mensaje.text = mensaje;
             text_Mensaje.gameObject.SetActive(true);
             mensajeTimer = messageDuration;
         }
 
-        Debug.Log(message);
+        if (isOpen == true)
+        {
+            panelInteractuar.gameObject.SetActive(false);
+        }
+        Debug.Log(mensaje);
     }
 
-    // Visualizar el rango de interacción
-  /*  void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transfrm.position, distancia_interactuar);
-    }
-  */
+
 }

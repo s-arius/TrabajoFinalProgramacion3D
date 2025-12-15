@@ -15,6 +15,9 @@ public class PickableItem : MonoBehaviour
     [SerializeField] private KeyCode interactKey = KeyCode.E;
     [SerializeField] private float interactionDistance = 3f;
 
+    [Header("Referencia")]
+    [SerializeField] private GameObject panel_Interactuar;
+
     private Transform playerTransform;
     private bool isInRange = false;
 
@@ -35,8 +38,10 @@ public class PickableItem : MonoBehaviour
         float distance = Vector3.Distance(transform.position, playerTransform.position);
         if (distance > interactionDistance)
         {
+            Debug.Log("Estamos en range");
             isInRange = false;
             return;
+            
         }
 
         // Recoger objeto
@@ -52,6 +57,7 @@ public class PickableItem : MonoBehaviour
         {
             isInRange = true;
             Debug.Log($"Presiona {interactKey} para recoger: {scr_ItemData.itemName}");
+            panel_Interactuar.SetActive(true);
         }
     }
 
@@ -60,6 +66,7 @@ public class PickableItem : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isInRange = false;
+            panel_Interactuar.SetActive(false);
         }
     }
 
@@ -75,12 +82,8 @@ public class PickableItem : MonoBehaviour
 
         // Destruir el objeto del mundo
         Destroy(gameObject);
+        panel_Interactuar.SetActive(false);
     }
 
-    // Visualizar el rango de interacción en el editor
-    void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, interactionDistance);
-    }
+
 }
