@@ -8,24 +8,34 @@ public class CrystalEraser : MonoBehaviour
     public Material crystalMaterial;
     public float brushSize = 0.1f;
 
+    [Header("Destrucción de objetos externos")]
+    public GameObject[] objectsToDestroy;   // objetos que se destruirán al completar el borrado
+    [Range(0.0f, 1f)]
+    public float eraseThreshold = 0.99f;    // % borrado necesario
+
     [Header("Efectos")]
-    public ParticleSystem eraseParticles; // Partículas al borrar
-    public AudioSource eraseSound;        // Sonido al borrar
-    [Range(0f, 1f)] public float eraseStrength = 1f; // Opacidad de borrado
+    public ParticleSystem eraseParticles;
+    public AudioSource eraseSound;
+    [Range(0f, 1f)] public float eraseStrength = 1f;
 
     RenderTexture eraseMask;
     Texture2D brush;
+    Texture2D readbackTex;
+
     int eraseMaskID;
+    bool isErasingCrystal = false;
+    bool destroyed = false;
 
     CustomCursor cursor;
-    bool isErasingCrystal = false;
 
     void Start()
     {
-
         cursor = FindObjectOfType<CustomCursor>();
 
-        // Crear RenderTexture
+        if (objectsToDestroy == null || objectsToDestroy.Length == 0)
+            objectsToDestroy = new GameObject[0]; // no destruir nada por defecto
+
+        // Crear RenderTexture para la máscara de borrado
         eraseMask = new RenderTexture(1024, 1024, 0, RenderTextureFormat.R8);
         eraseMask.Create();
 
@@ -36,7 +46,7 @@ public class CrystalEraser : MonoBehaviour
         eraseMaskID = Shader.PropertyToID("_EraseMask");
         crystalMaterial.SetTexture(eraseMaskID, eraseMask);
 
-        // Crear brocha circular con opacidad inicial
+        // Brocha circular
         brush = new Texture2D(64, 64, TextureFormat.RGBA32, false);
         for (int y = 0; y < brush.height; y++)
         {
@@ -45,15 +55,19 @@ public class CrystalEraser : MonoBehaviour
                 float dx = (x - brush.width / 2f) / (brush.width / 2f);
                 float dy = (y - brush.height / 2f) / (brush.height / 2f);
                 float d = Mathf.Sqrt(dx * dx + dy * dy);
-
-                brush.SetPixel(x, y, d <= 1 ? new Color(0, 0, 0, eraseStrength) : Color.clear);
+                brush.SetPixel(x, y, d <= 1f ? new Color(0, 0, 0, eraseStrength) : Color.clear);
             }
         }
         brush.Apply();
+
+        // Textura pequeña para lectura (mejor usar 128x128 para mayor precisión)
+        readbackTex = new Texture2D(128, 128, TextureFormat.R8, false);
     }
 
     void Update()
     {
+        if (destroyed) return;
+
         if (!staminaSystem.CanErase())
         {
             StopErasing();
@@ -77,7 +91,6 @@ public class CrystalEraser : MonoBehaviour
             staminaSystem.isErasing = false;
     }
 
-    // 🔹 Raycast desde el centro de la pantalla
     Ray CreateRayFromCenter()
     {
         Vector2 center = new Vector2(Screen.width / 2f, Screen.height / 2f);
@@ -124,23 +137,61 @@ public class CrystalEraser : MonoBehaviour
             ),
             brush
         );
+
         RenderTexture.active = null;
+
+        CheckIfFullyErased();
+    }
+
+    void CheckIfFullyErased()
+    {
+        if (destroyed || objectsToDestroy.Length == 0) return;
+
+        // Leer máscara en la textura
+        RenderTexture.active = eraseMask;
+        readbackTex.ReadPixels(new Rect(0, 0, readbackTex.width, readbackTex.height), 0, 0);
+        readbackTex.Apply();
+        RenderTexture.active = null;
+
+        Color32[] pixels = readbackTex.GetPixels32();
+        int erased = 0;
+
+        foreach (Color32 c in pixels)
+        {
+            if (c.r < 20) erased++;
+        }
+
+        float erasedPercent = erased / (float)pixels.Length;
+
+        if (erasedPercent >= eraseThreshold)
+            DestroyObjects();
+    }
+
+    void DestroyObjects()
+    {
+        if (destroyed) return;
+        destroyed = true;
+
+        StopEffects();
+        cursor?.DeactivateCursor();
+
+        foreach (GameObject obj in objectsToDestroy)
+        {
+            if (obj != null)
+                Destroy(obj);
+        }
     }
 
     void PlayEffects()
     {
-        // Partículas en el punto de borrado
         if (eraseParticles != null && !eraseParticles.isPlaying)
         {
             eraseParticles.transform.position = GetErasePoint();
             eraseParticles.Play();
         }
 
-        // Sonido
         if (eraseSound != null && !eraseSound.isPlaying)
-        {
             eraseSound.Play();
-        }
     }
 
     void StopEffects()
@@ -152,12 +203,18 @@ public class CrystalEraser : MonoBehaviour
             eraseSound.Stop();
     }
 
-    // Obtener punto de borrado en mundo (para partículas)
     Vector3 GetErasePoint()
     {
         Ray ray = CreateRayFromCenter();
         if (Physics.Raycast(ray, out RaycastHit hit))
             return hit.point;
+
         return playerCamera.transform.position + playerCamera.transform.forward * 2f;
+    }
+
+    void OnDestroy()
+    {
+        if (eraseMask != null)
+            eraseMask.Release();
     }
 }

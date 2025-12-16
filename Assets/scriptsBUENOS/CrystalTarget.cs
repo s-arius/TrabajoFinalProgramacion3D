@@ -1,40 +1,54 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 
 [RequireComponent(typeof(Collider))]
 public class CrystalTarget : MonoBehaviour
 {
-    [Header("Material del cristal (asignar el material que usa el renderer)")]
-    public Material crystalMaterial;    // asigna aquÌ Material1 o Material2 (la instancia que usa este cristal)
+    [Header("Material del cristal")]
+    public Material crystalMaterial;
+
+    [Header("Borrado")]
     public float brushSize = 0.1f;
+    [Range(0.7f, 0.98f)]
+    public float eraseThreshold = 0.9f; // % borrado necesario
+
+    [Header("Destrucci√≥n")]
+    public GameObject objectToDestroy; // üî• OBJETO A DESTRUIR
 
     RenderTexture eraseMask;
     Texture2D brush;
+    Texture2D readbackTex;
+
     int eraseMaskID;
+    float erasedAmount = 0f;
+    bool destroyed = false;
 
     void Awake()
     {
-        // seguridad
         if (crystalMaterial == null)
         {
-            Debug.LogWarning($"CrystalTarget en '{gameObject.name}' no tiene crystalMaterial asignado.");
+            Debug.LogWarning($"CrystalTarget en '{gameObject.name}' sin material.");
+            enabled = false;
             return;
         }
 
+        if (objectToDestroy == null)
+            objectToDestroy = gameObject;
+
         eraseMaskID = Shader.PropertyToID("_EraseMask");
 
-        // Crear RenderTexture ˙nica por cada cristal
         eraseMask = new RenderTexture(1024, 1024, 0, RenderTextureFormat.R8);
         eraseMask.Create();
 
-        // Inicializar en blanco (visible)
         RenderTexture.active = eraseMask;
         GL.Clear(true, true, Color.white);
         RenderTexture.active = null;
 
-        // Asignar la m·scara al material (aseg˙rate de que el material es la instancia que usa este renderer)
         crystalMaterial.SetTexture(eraseMaskID, eraseMask);
 
         CreateBrush();
+
+        // textura para leer p√≠xeles (MUY IMPORTANTE)
+        readbackTex = new Texture2D(64, 64, TextureFormat.R8, false);
     }
 
     void CreateBrush()
@@ -53,12 +67,11 @@ public class CrystalTarget : MonoBehaviour
         brush.Apply();
     }
 
-    // Pintar en este cristal; uv viene de RaycastHit.textureCoord
-    public bool Paint(Vector2 uv)
+    public void Paint(Vector2 uv)
     {
-        if (eraseMask == null || brush == null) return false;
+        if (destroyed) return;
 
-        uv.y = 1f - uv.y; // corregir Y
+        uv.y = 1f - uv.y;
 
         RenderTexture.active = eraseMask;
 
@@ -72,8 +85,42 @@ public class CrystalTarget : MonoBehaviour
             brush
         );
 
+        // üîç Medir borrado
+        MeasureErase();
+
         RenderTexture.active = null;
-        return true;
+    }
+
+    void MeasureErase()
+    {
+        // Leemos una regi√≥n peque√±a (optimizado)
+        RenderTexture.active = eraseMask;
+        readbackTex.ReadPixels(
+            new Rect(0, 0, readbackTex.width, readbackTex.height),
+            0, 0
+        );
+        readbackTex.Apply();
+
+        int erasedPixels = 0;
+        Color32[] pixels = readbackTex.GetPixels32();
+
+        foreach (Color32 c in pixels)
+        {
+            if (c.r < 20) erasedPixels++; // casi negro
+        }
+
+        erasedAmount = erasedPixels / (float)pixels.Length;
+
+        if (erasedAmount >= eraseThreshold)
+            DestroyCrystal();
+    }
+
+    void DestroyCrystal()
+    {
+        if (destroyed) return;
+        destroyed = true;
+
+        Destroy(objectToDestroy);
     }
 
     void OnDestroy()

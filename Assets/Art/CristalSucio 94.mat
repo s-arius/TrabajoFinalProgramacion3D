@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CristalSucio
+  m_Name: CristalSucio 94
   m_Shader: {fileID: 4800000, guid: 35e90f1bfb10e9a4291de157b13592ce, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0

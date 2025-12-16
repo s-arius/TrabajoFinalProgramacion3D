@@ -2,61 +2,64 @@
 
 public class CrystalEraserManager : MonoBehaviour
 {
+    [Header("Referencias")]
     public StaminaSystem staminaSystem;
     public Camera playerCamera;
 
     CustomCursor cursor;
+
     bool isMouseDown = false;
     bool cursorActive = false;
 
     void Start()
     {
         cursor = FindObjectOfType<CustomCursor>();
-        if (playerCamera == null && Camera.main != null) playerCamera = Camera.main;
+        if (playerCamera == null && Camera.main != null)
+            playerCamera = Camera.main;
     }
 
     void Update()
     {
-        if (!staminaSystem || playerCamera == null)
+        if (staminaSystem == null || playerCamera == null)
         {
-            // si falta algo, asegurar estado limpio
-            cursor?.DeactivateCursor();
+            ForceStop();
             return;
         }
 
-        // si no hay estamina → apagar todo
+        // 🔴 Sin stamina → parar todo
         if (!staminaSystem.CanErase())
         {
-            isMouseDown = false;
-            if (cursorActive) { cursor?.DeactivateCursor(); cursorActive = false; }
-            staminaSystem.isErasing = false;
+            ForceStop();
             return;
         }
 
-        // entrada del ratón
-        if (Input.GetMouseButtonDown(0)) isMouseDown = true;
+        // Input
+        if (Input.GetMouseButtonDown(0))
+            isMouseDown = true;
+
         if (Input.GetMouseButtonUp(0))
         {
             isMouseDown = false;
-            if (cursorActive) { cursor?.DeactivateCursor(); cursorActive = false; }
-            staminaSystem.isErasing = false;
+            ForceStop();
+            return;
         }
 
         if (!isMouseDown)
         {
-            // no manteniendo click: no consumir
             staminaSystem.isErasing = false;
             return;
         }
 
-        // si mantenemos el botón, comprobar qué tocamos
-        Ray ray = playerCamera.ScreenPointToRay(Input.mousePosition);
+        // 🔥 Ray SIEMPRE desde el centro de la cámara
+        Ray ray = CreateRayFromCenter();
+
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             CrystalTarget target = hit.collider.GetComponent<CrystalTarget>();
+
             if (target != null)
             {
-                // golpe a cristal válido → activar cursor si no activo
+                // Activar cursor solo una vez
                 if (!cursorActive)
                 {
                     cursor?.ActivateCursor();
@@ -65,19 +68,31 @@ public class CrystalEraserManager : MonoBehaviour
 
                 staminaSystem.isErasing = true;
 
-                // pintar; Paint devuelve true si pintó
-                bool painted = target.Paint(hit.textureCoord);
-                // si por algún motivo no pintó, podríamos desactivar cursor, pero lo mantenemos mientras golpee el target
+                // 🔥 Pintar (ya no devuelve bool)
+                target.Paint(hit.textureCoord);
                 return;
             }
         }
 
-        // si llegamos aquí: no golpeamos un CrystalTarget válido
+        // Si no estamos apuntando a un cristal válido
+        ForceStop();
+    }
+
+    Ray CreateRayFromCenter()
+    {
+        Vector2 center = new Vector2(Screen.width / 2f, Screen.height / 2f);
+        return playerCamera.ScreenPointToRay(center);
+    }
+
+    void ForceStop()
+    {
+        isMouseDown = false;
+        staminaSystem.isErasing = false;
+
         if (cursorActive)
         {
             cursor?.DeactivateCursor();
             cursorActive = false;
         }
-        staminaSystem.isErasing = false;
     }
 }
