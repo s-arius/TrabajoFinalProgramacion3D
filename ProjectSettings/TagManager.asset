@@ -8,6 +8,7 @@ TagManager:
   - Agua
   - Jabon
   - Panel_Interactuar
+  - LuzApagable
   layers:
   - Default
   - TransparentFX
