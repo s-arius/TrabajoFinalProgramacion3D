@@ -378,7 +378,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDistance: 5
   moveSpeed: 1
-  errorSound: {fileID: 0}
+  errorClip: {fileID: 8300000, guid: f52fd34582e4f804487a7bf39fe7aa81, type: 3}
+  errorVolume: 1
   maxDown: 8
   currentFloor: 100
 --- !u!1 &208638011
@@ -587,11 +588,12 @@ MonoBehaviour:
   playerCamera: {fileID: 330585545}
   crystalMaterial: {fileID: 2100000, guid: 727854f312ebe1543a404d11b7521524, type: 2}
   brushSize: 1
-  elevator: {fileID: 0}
+  elevator: {fileID: 185667456}
   objectsToDestroy: []
   eraseThreshold: 0.024
   eraseParticles: {fileID: 865033484}
-  eraseSound: {fileID: 0}
+  eraseClip: {fileID: 0}
+  eraseVolume: 1
   eraseStrength: 1
 --- !u!114 &250529827
 MonoBehaviour:
@@ -735,10 +737,12 @@ MonoBehaviour:
   crystalMaterial: {fileID: 2100000, guid: 727854f312ebe1543a404d11b7521524, type: 2}
   brushSize: 1
   elevator: {fileID: 185667456}
-  eraseThreshold: 0.9
-  unlockSound: {fileID: 0}
+  eraseThreshold: 0.999
+  unlockClip: {fileID: 8300000, guid: 2f3b3e00aae9a8d4fa4347599390ec4e, type: 3}
+  eraseClip: {fileID: 8300000, guid: a854075892b97dd4a99c94bfcc3a6b8a, type: 3}
+  eraseVolume: 0.6
+  unlockVolume: 1
   eraseParticles: {fileID: 865033484}
-  eraseSound: {fileID: 0}
   eraseStrength: 1
 --- !u!1 &330585543
 GameObject:
@@ -1450,11 +1454,12 @@ MonoBehaviour:
   playerCamera: {fileID: 330585545}
   crystalMaterial: {fileID: 2100000, guid: 65ca6675bd02d5c4ea7888e084f1d225, type: 2}
   brushSize: 1
-  elevator: {fileID: 0}
+  elevator: {fileID: 185667456}
   objectsToDestroy: []
   eraseThreshold: 0.279
   eraseParticles: {fileID: 865033484}
-  eraseSound: {fileID: 0}
+  eraseClip: {fileID: 0}
+  eraseVolume: 1
   eraseStrength: 1
 --- !u!114 &538905226
 MonoBehaviour:
@@ -1614,10 +1619,12 @@ MonoBehaviour:
   crystalMaterial: {fileID: 2100000, guid: 65ca6675bd02d5c4ea7888e084f1d225, type: 2}
   brushSize: 1
   elevator: {fileID: 185667456}
-  eraseThreshold: 0.9
-  unlockSound: {fileID: 0}
+  eraseThreshold: 0.999
+  unlockClip: {fileID: 8300000, guid: 2f3b3e00aae9a8d4fa4347599390ec4e, type: 3}
+  eraseClip: {fileID: 8300000, guid: a854075892b97dd4a99c94bfcc3a6b8a, type: 3}
+  eraseVolume: 0.6
+  unlockVolume: 1
   eraseParticles: {fileID: 865033484}
-  eraseSound: {fileID: 0}
   eraseStrength: 1
 --- !u!1 &543607512
 GameObject:
@@ -7663,9 +7670,10 @@ MonoBehaviour:
   - {fileID: 2108715744}
   - {fileID: 2069143468}
   - {fileID: 922020855}
-  eraseThreshold: 1
+  eraseThreshold: 0.999
   eraseParticles: {fileID: 865033484}
-  eraseSound: {fileID: 0}
+  eraseClip: {fileID: 8300000, guid: a854075892b97dd4a99c94bfcc3a6b8a, type: 3}
+  eraseVolume: 1
   eraseStrength: 1
 --- !u!114 &922020858
 MonoBehaviour:
@@ -7983,7 +7991,8 @@ MonoBehaviour:
   objectsToDestroy: []
   eraseThreshold: 0.9
   eraseParticles: {fileID: 865033484}
-  eraseSound: {fileID: 0}
+  eraseClip: {fileID: 0}
+  eraseVolume: 1
   eraseStrength: 1
 --- !u!114 &1025264379
 MonoBehaviour:
@@ -8122,15 +8131,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9bec400189ea34cb741dfe6a5a9303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaSystem: {fileID: 0}
-  playerCamera: {fileID: 0}
-  crystalMaterial: {fileID: 0}
-  brushSize: 0.1
-  elevator: {fileID: 0}
-  eraseThreshold: 0.99
-  unlockSound: {fileID: 0}
-  eraseParticles: {fileID: 0}
-  eraseSound: {fileID: 0}
+  staminaSystem: {fileID: 1813319228}
+  playerCamera: {fileID: 330585545}
+  crystalMaterial: {fileID: 2100000, guid: be22b737e7500a44687dc6bbe7cd1d34, type: 2}
+  brushSize: 1
+  elevator: {fileID: 185667456}
+  eraseThreshold: 0.999
+  unlockClip: {fileID: 8300000, guid: 2f3b3e00aae9a8d4fa4347599390ec4e, type: 3}
+  eraseClip: {fileID: 8300000, guid: a854075892b97dd4a99c94bfcc3a6b8a, type: 3}
+  eraseVolume: 0.6
+  unlockVolume: 1
+  eraseParticles: {fileID: 865033484}
   eraseStrength: 1
 --- !u!1 &1131510221
 GameObject:
@@ -8854,7 +8865,8 @@ MonoBehaviour:
   objectsToDestroy: []
   eraseThreshold: 0.9
   eraseParticles: {fileID: 865033484}
-  eraseSound: {fileID: 0}
+  eraseClip: {fileID: 0}
+  eraseVolume: 1
   eraseStrength: 1
 --- !u!114 &1614400906
 MonoBehaviour:
@@ -8993,15 +9005,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9bec400189ea34cb741dfe6a5a9303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaSystem: {fileID: 0}
-  playerCamera: {fileID: 0}
-  crystalMaterial: {fileID: 0}
-  brushSize: 0.1
-  elevator: {fileID: 0}
-  eraseThreshold: 0.99
-  unlockSound: {fileID: 0}
-  eraseParticles: {fileID: 0}
-  eraseSound: {fileID: 0}
+  staminaSystem: {fileID: 1813319228}
+  playerCamera: {fileID: 330585545}
+  crystalMaterial: {fileID: 2100000, guid: 2e83596353a067b4eba56f42ff4c030c, type: 2}
+  brushSize: 1
+  elevator: {fileID: 185667456}
+  eraseThreshold: 0.999
+  unlockClip: {fileID: 8300000, guid: 2f3b3e00aae9a8d4fa4347599390ec4e, type: 3}
+  eraseClip: {fileID: 8300000, guid: a854075892b97dd4a99c94bfcc3a6b8a, type: 3}
+  eraseVolume: 0.6
+  unlockVolume: 1
+  eraseParticles: {fileID: 865033484}
   eraseStrength: 1
 --- !u!1 &1684012924
 GameObject:
@@ -9286,7 +9300,8 @@ MonoBehaviour:
   objectsToDestroy: []
   eraseThreshold: 0.9
   eraseParticles: {fileID: 865033484}
-  eraseSound: {fileID: 0}
+  eraseClip: {fileID: 0}
+  eraseVolume: 1
   eraseStrength: 1
 --- !u!114 &1774993608
 MonoBehaviour:
@@ -9425,15 +9440,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9bec400189ea34cb741dfe6a5a9303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaSystem: {fileID: 0}
-  playerCamera: {fileID: 0}
-  crystalMaterial: {fileID: 0}
-  brushSize: 0.1
-  elevator: {fileID: 0}
-  eraseThreshold: 0.99
-  unlockSound: {fileID: 0}
-  eraseParticles: {fileID: 0}
-  eraseSound: {fileID: 0}
+  staminaSystem: {fileID: 1813319228}
+  playerCamera: {fileID: 330585545}
+  crystalMaterial: {fileID: 2100000, guid: 9e7957d267554d54183b8d9c5d4d293c, type: 2}
+  brushSize: 1
+  elevator: {fileID: 185667456}
+  eraseThreshold: 0.999
+  unlockClip: {fileID: 8300000, guid: 2f3b3e00aae9a8d4fa4347599390ec4e, type: 3}
+  eraseClip: {fileID: 8300000, guid: a854075892b97dd4a99c94bfcc3a6b8a, type: 3}
+  eraseVolume: 0.6
+  unlockVolume: 1
+  eraseParticles: {fileID: 865033484}
   eraseStrength: 1
 --- !u!1 &1777213913
 GameObject:
@@ -10325,7 +10342,8 @@ MonoBehaviour:
   objectsToDestroy: []
   eraseThreshold: 0.973
   eraseParticles: {fileID: 865033484}
-  eraseSound: {fileID: 0}
+  eraseClip: {fileID: 0}
+  eraseVolume: 1
   eraseStrength: 1
 --- !u!114 &1955152264
 MonoBehaviour:
@@ -10360,10 +10378,12 @@ MonoBehaviour:
   crystalMaterial: {fileID: 2100000, guid: 06ab64da6079c5e4697ae2fce7f74087, type: 2}
   brushSize: 1
   elevator: {fileID: 185667456}
-  eraseThreshold: 0.9
-  unlockSound: {fileID: 0}
+  eraseThreshold: 0.999
+  unlockClip: {fileID: 8300000, guid: 2f3b3e00aae9a8d4fa4347599390ec4e, type: 3}
+  eraseClip: {fileID: 8300000, guid: a854075892b97dd4a99c94bfcc3a6b8a, type: 3}
+  eraseVolume: 0.6
+  unlockVolume: 1
   eraseParticles: {fileID: 865033484}
-  eraseSound: {fileID: 0}
   eraseStrength: 1
 --- !u!1 &1975827641
 GameObject:
@@ -10610,7 +10630,8 @@ MonoBehaviour:
   objectsToDestroy: []
   eraseThreshold: 0.9
   eraseParticles: {fileID: 865033484}
-  eraseSound: {fileID: 0}
+  eraseClip: {fileID: 0}
+  eraseVolume: 1
   eraseStrength: 1
 --- !u!114 &2069143471
 MonoBehaviour:
@@ -10749,15 +10770,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9bec400189ea34cb741dfe6a5a9303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaSystem: {fileID: 0}
-  playerCamera: {fileID: 0}
-  crystalMaterial: {fileID: 0}
-  brushSize: 0.1
-  elevator: {fileID: 0}
-  eraseThreshold: 0.99
-  unlockSound: {fileID: 0}
-  eraseParticles: {fileID: 0}
-  eraseSound: {fileID: 0}
+  staminaSystem: {fileID: 1813319228}
+  playerCamera: {fileID: 330585545}
+  crystalMaterial: {fileID: 2100000, guid: b896e9d5c56e124479b0f4d8311e995b, type: 2}
+  brushSize: 1
+  elevator: {fileID: 185667456}
+  eraseThreshold: 0.999
+  unlockClip: {fileID: 8300000, guid: 2f3b3e00aae9a8d4fa4347599390ec4e, type: 3}
+  eraseClip: {fileID: 8300000, guid: a854075892b97dd4a99c94bfcc3a6b8a, type: 3}
+  eraseVolume: 0.6
+  unlockVolume: 1
+  eraseParticles: {fileID: 865033484}
   eraseStrength: 1
 --- !u!1 &2108715744
 GameObject:
@@ -10819,7 +10842,8 @@ MonoBehaviour:
   objectsToDestroy: []
   eraseThreshold: 0.979
   eraseParticles: {fileID: 865033484}
-  eraseSound: {fileID: 0}
+  eraseClip: {fileID: 0}
+  eraseVolume: 1
   eraseStrength: 1
 --- !u!114 &2108715747
 MonoBehaviour:
@@ -10958,15 +10982,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d9bec400189ea34cb741dfe6a5a9303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  staminaSystem: {fileID: 0}
-  playerCamera: {fileID: 0}
-  crystalMaterial: {fileID: 0}
-  brushSize: 0.1
-  elevator: {fileID: 0}
-  eraseThreshold: 0.99
-  unlockSound: {fileID: 0}
-  eraseParticles: {fileID: 0}
-  eraseSound: {fileID: 0}
+  staminaSystem: {fileID: 1813319228}
+  playerCamera: {fileID: 330585545}
+  crystalMaterial: {fileID: 2100000, guid: 9a0c7c7c467b767418c14471fca9d121, type: 2}
+  brushSize: 1
+  elevator: {fileID: 185667456}
+  eraseThreshold: 0.999
+  unlockClip: {fileID: 8300000, guid: 2f3b3e00aae9a8d4fa4347599390ec4e, type: 3}
+  eraseClip: {fileID: 8300000, guid: a854075892b97dd4a99c94bfcc3a6b8a, type: 3}
+  eraseVolume: 0.6
+  unlockVolume: 1
+  eraseParticles: {fileID: 865033484}
   eraseStrength: 1
 --- !u!1 &2138605390
 GameObject:

@@ -12,13 +12,15 @@ public class CrystalEraseUnlocker : MonoBehaviour
     public ElevatorController elevator;
     [Range(0.9f, 1f)]
     public float eraseThreshold = 0.99f;
-    [Header("Sonido de desbloqueo")]
-    public AudioSource unlockSound;   // 🔔 ding
 
+    [Header("Sonidos (AudioClip)")]
+    public AudioClip unlockClip;   // 🔔 ding
+    public AudioClip eraseClip;    // sonido al borrar
+    public float eraseVolume = 0.6f;
+    public float unlockVolume = 1f;
 
     [Header("Efectos (opcional)")]
     public ParticleSystem eraseParticles;
-    public AudioSource eraseSound;
     [Range(0f, 1f)] public float eraseStrength = 1f;
 
     RenderTexture eraseMask;
@@ -30,10 +32,16 @@ public class CrystalEraseUnlocker : MonoBehaviour
     bool unlocked = false;
 
     CustomCursor cursor;
+    AudioSource audioSource;
 
     void Start()
     {
         cursor = FindObjectOfType<CustomCursor>();
+
+        // 🎧 AudioSource interno
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.loop = false;
 
         // RenderTexture
         eraseMask = new RenderTexture(1024, 1024, 0, RenderTextureFormat.R8);
@@ -65,13 +73,12 @@ public class CrystalEraseUnlocker : MonoBehaviour
         }
         brush.Apply();
 
-        // Textura pequeña para lectura
+        // Textura para lectura
         readbackTex = new Texture2D(128, 128, TextureFormat.R8, false);
     }
 
     void Update()
     {
-
         if (!staminaSystem.CanErase())
         {
             StopErasing();
@@ -85,7 +92,7 @@ public class CrystalEraseUnlocker : MonoBehaviour
         {
             staminaSystem.isErasing = true;
             Paint();
-            PlayEffects();
+            PlayEraseEffects();
         }
 
         if (Input.GetMouseButtonUp(0))
@@ -151,7 +158,7 @@ public class CrystalEraseUnlocker : MonoBehaviour
 
     void CheckIfUnlocked()
     {
-        if (unlocked) return; // 🔒 solo bloquea el unlock, no el borrado
+        if (unlocked) return;
 
         RenderTexture.active = eraseMask;
         readbackTex.ReadPixels(
@@ -173,11 +180,8 @@ public class CrystalEraseUnlocker : MonoBehaviour
         float erasedPercent = erased / (float)pixels.Length;
 
         if (erasedPercent >= eraseThreshold)
-        {
             UnlockElevator();
-        }
     }
-
 
     void UnlockElevator()
     {
@@ -189,17 +193,16 @@ public class CrystalEraseUnlocker : MonoBehaviour
         cursor?.DeactivateCursor();
 
         // 🔔 sonido de desbloqueo
-        if (unlockSound != null)
-            unlockSound.Play();
+        if (unlockClip != null)
+            audioSource.PlayOneShot(unlockClip, unlockVolume);
 
         if (elevator != null)
-            elevator.UnlockNextFloor();
+            elevator.UnlockCurrentFloor();
 
         Debug.Log("🔓 Planta desbloqueada");
     }
 
-
-    void PlayEffects()
+    void PlayEraseEffects()
     {
         if (eraseParticles != null && !eraseParticles.isPlaying)
         {
@@ -207,17 +210,14 @@ public class CrystalEraseUnlocker : MonoBehaviour
             eraseParticles.Play();
         }
 
-        if (eraseSound != null && !eraseSound.isPlaying)
-            eraseSound.Play();
+        if (eraseClip != null && !audioSource.isPlaying)
+            audioSource.PlayOneShot(eraseClip, eraseVolume);
     }
 
     void StopEffects()
     {
         if (eraseParticles != null && eraseParticles.isPlaying)
             eraseParticles.Stop();
-
-        if (eraseSound != null && eraseSound.isPlaying)
-            eraseSound.Stop();
     }
 
     Vector3 GetErasePoint()

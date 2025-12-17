@@ -1,24 +1,23 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class ElevatorController : MonoBehaviour
 {
     public float moveDistance = 100f;
     public float moveSpeed = 5f;
-    [Header("Sonidos")]
-    public AudioSource errorSound;   // ❌ error al bajar sin permiso
 
+    [Header("Sonidos")]
+    public AudioSource errorSound;   // ❌ error al intentar mover sin desbloqueo
 
     private Vector3 targetPosition;
     private Vector3 initialPosition;
-    private int downCount = 0;
-  
 
-
-    public int maxDown = 8;
     public int currentFloor = 100;
+    public int maxDown = 8;
+    private int downCount = 0;
 
-    // 🔒 BLOQUEO POR CRISTAL
-    private bool canGoDown = false;
+    // Registro de qué plantas tienen el cristal borrado
+    private HashSet<int> unlockedFloors = new HashSet<int>();
 
     void Start()
     {
@@ -28,40 +27,44 @@ public class ElevatorController : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.Lerp(
-            transform.position,
-            targetPosition,
-            Time.deltaTime * moveSpeed
-        );
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * moveSpeed);
     }
-
 
     public void MoveUp()
     {
+        int nextFloor = currentFloor + 1;
+
+        // Solo permite subir si la planta actual está desbloqueada
+        if (!unlockedFloors.Contains(currentFloor))
+        {
+            PlayError();
+            Debug.Log("❌ Debes borrar el cristal de esta planta antes de subir.");
+            return;
+        }
+
         if (downCount > 0)
         {
             targetPosition += Vector3.up * moveDistance;
             downCount--;
             currentFloor++;
 
-            // al subir, el siguiente cristal vuelve a bloquear
-            canGoDown = false;
+            Debug.Log($"⬆ Subiste a la planta {currentFloor}");
         }
         else
         {
-            Debug.Log("No se puede subir más de la planta 100");
+            Debug.Log("⛔ Ya estás en la planta superior.");
         }
     }
 
     public void MoveDown()
     {
-        if (!canGoDown)
-        {
-            // ❌ sonido de error
-            if (errorSound != null && !errorSound.isPlaying)
-                errorSound.Play();
+        int nextFloor = currentFloor - 1;
 
-            Debug.Log("❌ No puedes bajar: cristal no completado");
+        // Solo permite bajar si la planta actual está desbloqueada
+        if (!unlockedFloors.Contains(currentFloor))
+        {
+            PlayError();
+            Debug.Log("❌ Debes borrar el cristal de esta planta antes de bajar.");
             return;
         }
 
@@ -71,18 +74,27 @@ public class ElevatorController : MonoBehaviour
             downCount++;
             currentFloor--;
 
-            canGoDown = false; // 🔒 vuelve a bloquear hasta el siguiente cristal
+            Debug.Log($"⬇ Bajaste a la planta {currentFloor}");
         }
         else
         {
-            Debug.Log("⛔ Límite inferior alcanzado");
+            Debug.Log("⛔ Límite inferior alcanzado.");
         }
     }
 
-
-    public void UnlockNextFloor()
+    // Método que llama CrystalEraseUnlocker cuando se borra el cristal
+    public void UnlockCurrentFloor()
     {
-        canGoDown = true;
+        if (!unlockedFloors.Contains(currentFloor))
+        {
+            unlockedFloors.Add(currentFloor);
+            Debug.Log($"🔓 Planta {currentFloor} desbloqueada.");
+        }
     }
 
+    private void PlayError()
+    {
+        if (errorSound != null && !errorSound.isPlaying)
+            errorSound.Play();
+    }
 }
