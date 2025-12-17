@@ -34,7 +34,7 @@ public class InventoryManager : MonoBehaviour
         if (!items.Contains(item))
         {
             items.Add(item);
-            Debug.Log($"Objeto añadido: {item.itemName}");
+            Debug.Log($"Objeto añadido: {item.nombre}");
         }
     }
 
@@ -54,7 +54,7 @@ public class InventoryManager : MonoBehaviour
         if (items.Contains(item))
         {
             items.Remove(item);
-            Debug.Log($"Objeto usado: {item.itemName}");
+            Debug.Log($"Objeto usado: {item.nombre}");
         }
     }
 

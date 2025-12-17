@@ -12,10 +12,5 @@ public class scr_ItemData : ScriptableObject
     [TextArea(2,2)]
     public string pensamiento;
 
-    
-    [Header("Información del Objeto")]
-    public string itemName = "Objeto";
-    [TextArea(3, 5)]
-    public string description = "Descripción del objeto";
   
 }

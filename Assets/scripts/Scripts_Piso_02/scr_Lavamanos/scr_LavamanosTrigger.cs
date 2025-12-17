@@ -10,8 +10,6 @@ public class scr_LavamanosTrigger : MonoBehaviour
     {
         myScr_EspejoController = GetComponentInParent<scr_espejoController>();
         
-        panel_Interactuar = GameObject.Find("Panel_Interactuar");
-
         if (panel_Interactuar == null) Debug.LogWarning("PanelInteractuar vacio");
 
         panel_Interactuar.SetActive(false);

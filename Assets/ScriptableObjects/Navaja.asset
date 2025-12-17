@@ -10,10 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b889b74ce7f4df46b57ba63b21b2187, type: 3}
-  m_Name: Llave_Tecla
+  m_Name: Navaja
   m_EditorClassIdentifier: 
-  nombre: Tecla
-  investigationPrefab: {fileID: 2417355222298384666, guid: 177571c30ec61604e863cb3ba31ea050, type: 3}
-  pensamiento: Hola
-  itemName: Objeto
-  description: ' "Una antigua llave dorada que abre puertas misteriosas"'
+  nombre: Navaja
+  investigationPrefab: {fileID: 2417355222298384666, guid: a14a6c3c2bb018a469131b0f3cb1eaeb, type: 3}
+  pensamiento: "\"Wow, una navaja suiza \xA1Tremeendooo!!"

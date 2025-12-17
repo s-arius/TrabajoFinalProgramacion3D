@@ -1,4 +1,5 @@
 using NUnit.Framework.Interfaces;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -11,6 +12,11 @@ public class InvestigationMode : MonoBehaviour
     [Header("Configuración")]
     [SerializeField] private Transform investigationPoint; // Punto delante de la cámara
     [SerializeField] private float rotationSpeed = 100f;
+
+    [Header("Panel de Pensamiento")]
+    [SerializeField] private GameObject thoughtPanel; // Panel que contiene el pensamiento
+    [SerializeField] private TextMeshProUGUI thoughtText; // Texto del pensamiento
+
 
     private GameObject currentObject;
     private bool isInvestigating = false;
@@ -25,6 +31,8 @@ public class InvestigationMode : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        thoughtPanel.SetActive(false);
     }
 
     void Update()
@@ -48,9 +56,8 @@ public class InvestigationMode : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Entra en modo investigación mostrando el objeto
-    /// </summary>
+   
+    // Entra en modo investigación mostrando el objeto
     public void StartInvestigation(scr_ItemData item)
     {
         if (item.investigationPrefab == null)
@@ -72,16 +79,26 @@ public class InvestigationMode : MonoBehaviour
             playerController.enabled = false;
         }
 
+        //Activar panel y actualizar texto 
+        if (thoughtPanel != null && thoughtText != null && !string.IsNullOrEmpty(item.pensamiento))
+        {
+            thoughtText.text = item.pensamiento;
+            thoughtPanel.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("Se te olvido referenciar algo man, WT????");
+        }
+
         // Bloquear el cursor
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-        Debug.Log($"Investigando: {item.itemName}");
+        Debug.Log($"Investigando: {item.nombre}");
     }
 
-    /// <summary>
-    /// Sale del modo investigación
-    /// </summary>
+    // Sale del modo investigación
+    
     public void ExitInvestigation()
     {
         if (!isInvestigating) return;
@@ -99,6 +116,12 @@ public class InvestigationMode : MonoBehaviour
         if (playerController != null)
         {
             playerController.enabled = true;
+        }
+
+        // Ocultar el panel de pensamiento
+        if (thoughtPanel != null)
+        {
+            thoughtPanel.SetActive(false);
         }
 
         // Restaurar el cursor

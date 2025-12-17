@@ -16,7 +16,7 @@ public class scr_doorController : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject panelMensaje;
-    [SerializeField] private TextMeshProUGUI text_Mensaje; // Mensaje en pantalla
+    //[SerializeField] private TextMeshProUGUI text_Mensaje; // Mensaje en pantalla
     [SerializeField] private float messageDuration = 2f;
     [SerializeField] private GameObject panelInteractuar;
     [SerializeField] private TextMeshProUGUI text_Interactuar;
@@ -28,34 +28,18 @@ public class scr_doorController : MonoBehaviour
     private Transform playerTransform;
     internal bool enRango = false;
     internal bool isOpen = false;
-    private float mensajeTimer = 0f;
+    //private float mensajeTimer = 0f;
 
     void Start()
     {
         playerTransform = Camera.main.transform;
         GetComponent<Collider>().isTrigger = true;
 
-        if (text_Mensaje != null)
-        {
-            panelMensaje.gameObject.SetActive(false);
-            text_Mensaje.gameObject.SetActive(false);
-        }
+        panelInteractuar.SetActive(false);
     }
 
     void Update()
     {
-        // Ocultar mensaje después del tiempo configurado
-        if (mensajeTimer > 0)
-        {
-            mensajeTimer -= Time.deltaTime;
-            if (mensajeTimer <= 0 && text_Mensaje != null)
-            {
-                panelMensaje.gameObject.SetActive(false);
-                text_Mensaje.gameObject.SetActive(false);
-
-            }
-        }
-
         if (!enRango || isOpen) return;
 
         // Comprobar distancia
@@ -91,7 +75,7 @@ public class scr_doorController : MonoBehaviour
         }
         else
         {
-            ShowMessage($"Necesitas: {ItemNecesario.itemName}");
+            MostrarMensaje($"Necesitas: {ItemNecesario.nombre}");
         }
     }
 
@@ -101,7 +85,7 @@ public class scr_doorController : MonoBehaviour
     void OpenDoor()
     {
         isOpen = true;
-        ShowMessage("Puerta abierta");
+        MostrarMensaje("Puerta abierta");
 
         // Reproducir animación si existe
         if (doorAnimator != null)
@@ -120,15 +104,12 @@ public class scr_doorController : MonoBehaviour
     }
 
     // Muestra un mensaje temporal en pantalla
-    void ShowMessage(string mensaje)
+    void MostrarMensaje(string mensaje)
     {
-        if (text_Mensaje != null)
-        {
-            panelMensaje.gameObject.SetActive(true);
-            text_Mensaje.text = mensaje;
-            text_Mensaje.gameObject.SetActive(true);
-            mensajeTimer = messageDuration;
-        }
+
+        scr_MensajeManager.Instance.MostrarMensaje(mensaje, messageDuration);
+        Debug.Log(mensaje);
+        
 
         if (isOpen == true)
         {
@@ -137,5 +118,27 @@ public class scr_doorController : MonoBehaviour
         Debug.Log(mensaje);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            panelInteractuar.SetActive(true);
+            enRango = true;
+
+            /*if (myscr_PuertaController.isOpen == true) //Intento de ocultar el panel cuando el objeto se destruya
+            {
+                panel_Interactuar.SetActive(false);
+            }*/
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            panelInteractuar.SetActive(false);
+            enRango = false;
+
+        }
+    }
 
 }

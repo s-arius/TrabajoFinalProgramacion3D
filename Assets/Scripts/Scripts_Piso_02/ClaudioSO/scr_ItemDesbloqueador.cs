@@ -1,30 +1,29 @@
 using NUnit.Framework.Interfaces;
 using UnityEngine;
 
-/// <summary>
-/// Script para objetos que el jugador puede recoger.
-/// Al interactuar, se añade al inventario y se activa el modo investigación.
-/// </summary>
+
+// Script para objetos que el jugador puede recoger.
+// Al interactuar, se añade al inventario y se activa el modo investigación.
 [RequireComponent(typeof(Collider))]
-public class PickableItem : MonoBehaviour
+public class ItemDesbloqueador : MonoBehaviour
 {
     [Header("Datos del Objeto")]
     [SerializeField] private scr_ItemData scr_ItemData;
 
     [Header("Configuración")]
     [SerializeField] private KeyCode interactKey = KeyCode.E;
-    [SerializeField] private float interactionDistance = 3f;
+    //[SerializeField] private float interactionDistance = 3f;
 
     [Header("Referencia")]
     [SerializeField] private GameObject panel_Interactuar;
 
-    private Transform playerTransform;
+    //private Transform playerTransform;
     private bool isInRange = false;
 
     void Start()
     {
         // Buscar al jugador
-        playerTransform = Camera.main.transform;
+        //playerTransform = Camera.main.transform;
 
         // El trigger debe estar activado
         GetComponent<Collider>().isTrigger = true;
@@ -35,14 +34,14 @@ public class PickableItem : MonoBehaviour
         if (!isInRange) return;
 
         // Comprobar distancia
-        float distance = Vector3.Distance(transform.position, playerTransform.position);
+      /*  float distance = Vector3.Distance(transform.position, playerTransform.position);
         if (distance > interactionDistance)
         {
             Debug.Log("Estamos en range");
             isInRange = false;
             return;
             
-        }
+        }*/
 
         // Recoger objeto
         if (Input.GetKeyDown(interactKey))
@@ -56,7 +55,7 @@ public class PickableItem : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isInRange = true;
-            Debug.Log($"Presiona {interactKey} para recoger: {scr_ItemData.itemName}");
+            Debug.Log($"Presiona {interactKey} para recoger: {scr_ItemData.nombre}");
             panel_Interactuar.SetActive(true);
         }
     }
