@@ -1,16 +1,24 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 
 public class ElevatorController : MonoBehaviour
 {
     public float moveDistance = 100f;
     public float moveSpeed = 5f;
+    [Header("Sonidos")]
+    public AudioSource errorSound;   // ‚ùå error al bajar sin permiso
+
 
     private Vector3 targetPosition;
-    private Vector3 initialPosition;  // posiciÛn inicial para limitar subida
-    private int downCount = 0;        // cantidad de pisos bajados desde la inicial
-    public int maxDown = 8;           // m·ximo de pisos que se puede bajar
+    private Vector3 initialPosition;
+    private int downCount = 0;
+  
 
-    public int currentFloor = 100;    // piso inicial
+
+    public int maxDown = 8;
+    public int currentFloor = 100;
+
+    // üîí BLOQUEO POR CRISTAL
+    private bool canGoDown = false;
 
     void Start()
     {
@@ -20,36 +28,61 @@ public class ElevatorController : MonoBehaviour
 
     void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * moveSpeed);
+        transform.position = Vector3.Lerp(
+            transform.position,
+            targetPosition,
+            Time.deltaTime * moveSpeed
+        );
     }
+
 
     public void MoveUp()
     {
-        // No subir m·s all· de la posiciÛn inicial
         if (downCount > 0)
         {
             targetPosition += Vector3.up * moveDistance;
             downCount--;
             currentFloor++;
+
+            // al subir, el siguiente cristal vuelve a bloquear
+            canGoDown = false;
         }
         else
         {
-            Debug.Log("No se puede subir m·s desde la posiciÛn inicial");
+            Debug.Log("No se puede subir m√°s de la planta 100");
         }
     }
 
     public void MoveDown()
     {
-        // Solo bajar si no se ha llegado al lÌmite
+        if (!canGoDown)
+        {
+            // ‚ùå sonido de error
+            if (errorSound != null && !errorSound.isPlaying)
+                errorSound.Play();
+
+            Debug.Log("‚ùå No puedes bajar: cristal no completado");
+            return;
+        }
+
         if (downCount < maxDown)
         {
             targetPosition += Vector3.down * moveDistance;
             downCount++;
             currentFloor--;
+
+            canGoDown = false; // üîí vuelve a bloquear hasta el siguiente cristal
         }
         else
         {
-            Debug.Log("Se ha alcanzado el lÌmite de pisos hacia abajo");
+            Debug.Log("‚õî L√≠mite inferior alcanzado");
         }
     }
+
+
+    public void UnlockNextFloor()
+    {
+        canGoDown = true;
+    }
+
 }
