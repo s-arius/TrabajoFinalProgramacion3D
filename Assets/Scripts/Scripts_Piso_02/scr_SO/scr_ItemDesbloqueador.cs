@@ -11,7 +11,7 @@ public class ItemDesbloqueador : MonoBehaviour
     [SerializeField] private scr_ItemData scr_ItemData;
 
     [Header("Configuración")]
-    [SerializeField] private KeyCode interactKey = KeyCode.E;
+    [SerializeField] private KeyCode teclaInteraccion= KeyCode.E;
 
     [Header("Referencia")]
     [SerializeField] private GameObject panel_Interactuar;
@@ -30,7 +30,7 @@ public class ItemDesbloqueador : MonoBehaviour
 
 
         // Recoger objeto
-        if (Input.GetKeyDown(interactKey))
+        if (Input.GetKeyDown(teclaInteraccion))
         {
             Recoger();
         }
@@ -41,7 +41,7 @@ public class ItemDesbloqueador : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             estaEnRango = true;
-            Debug.Log($"Presiona {interactKey} para recoger: {scr_ItemData.nombre}");
+            Debug.Log($"Presiona {teclaInteraccion} para recoger: {scr_ItemData.nombre}");
             panel_Interactuar.SetActive(true);
         }
     }

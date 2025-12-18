@@ -31,7 +31,7 @@ public class scr_ObjetoBloqueador : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private GameObject panelMensaje;
-    [SerializeField] private float messageDuration = 2f;
+    [SerializeField] private float mensaje_Duracion = 2f;
     [SerializeField] private GameObject panelInteractuar;
     [SerializeField] private TextMeshProUGUI text_Interactuar;
 
@@ -111,7 +111,7 @@ public class scr_ObjetoBloqueador : MonoBehaviour
     void MostrarMensaje(string mensaje)
     {
 
-        scr_MensajeManager.Instance.MostrarMensaje(mensaje, messageDuration);
+        scr_MensajeManager.Instance.MostrarMensaje(mensaje, mensaje_Duracion);
         Debug.Log(mensaje);
         
 
