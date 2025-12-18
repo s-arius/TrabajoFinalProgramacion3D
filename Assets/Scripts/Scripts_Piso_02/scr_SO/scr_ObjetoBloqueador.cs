@@ -18,28 +18,27 @@ public class scr_ObjetoBloqueador : MonoBehaviour
     [SerializeField] private TipoInteraccion tipoInteraccion = TipoInteraccion.Puerta;
 
     [Header("Requerimientos")]
-    [SerializeField] private scr_ItemData ItemNecesario; // La llave necesaria
-    [SerializeField] private bool consumirItem = false;  // Cuando se activehara que el objeto sea eliminado de la lista.
+    [SerializeField] private scr_ItemData ItemNecesario; // La "llave" necesaria para desbloquear el objeto
 
     [Header("Mensajes Personalizados")]
-    [SerializeField][TextArea(2, 3)] private string messageWithoutItem = "Ejemplo: Necesitas un objeto para interactuar";
-    [SerializeField][TextArea(2, 3)] private string messageWithItem = "Ejemplo: Objeto desbloqueado";
+    [Tooltip("Escribe los mensajes que se mostraran en la UI al interactuar")]
+    [SerializeField][TextArea(2, 3)] private string mensajeSinItem = "Ejemplo: Necesitas un objeto para interactuar";
+    [SerializeField][TextArea(2, 3)] private string mensajeConItem = "Ejemplo: Objeto desbloqueado";
 
 
     [Header("Configuración")]
     [SerializeField] private KeyCode Tecla_deInteraccion = KeyCode.E;
-    //[SerializeField] private float distancia_interactuar = 3f;
 
     [Header("UI")]
     [SerializeField] private GameObject panelMensaje;
-    //[SerializeField] private TextMeshProUGUI text_Mensaje; // Mensaje en pantalla
     [SerializeField] private float messageDuration = 2f;
     [SerializeField] private GameObject panelInteractuar;
     [SerializeField] private TextMeshProUGUI text_Interactuar;
 
-    [Header("Animación (Opcional)")]
-    [SerializeField] private Animator objectAnimator;
-    [SerializeField] private string activationTrigger = "Activate";
+    [Header("Animación (Opcional)")] //Actualmente esta puesto como ejemplo. Si no se quiere usar, pues no se usa.
+    [Tooltip ("Solo si quieres usar animaciones")]
+    [SerializeField] private Animator miAnimator;
+    [SerializeField] private string activaTrigger = "Activate";
 
     //Variables 
     //private Transform playerTransform;
@@ -58,60 +57,50 @@ public class scr_ObjetoBloqueador : MonoBehaviour
     {
         if (!enRango || estaActivada) return;
 
-        // Comprobar distancia
-        //float distance = Vector3.Distance(transform.position, playerTransform.position);
-        /*if (distance > distancia_interactuar)
-        {
-            enRango = false;
-            return;
-        } */
 
         // Intentar abrir
         if (Input.GetKeyDown(Tecla_deInteraccion))
         {
-            intentarActivacion();
+            intentarEjecutar();
         }
     }
 
 
  
     // Intenta Activar el objeto
-    void intentarActivacion()
+    void intentarEjecutar()
     {
         // Comprobar si el jugador tiene el objeto necesario
-        if (InventoryManager.Instance.HasItem(ItemNecesario))
+        if (InventoryManager.Instancia.TieneElItem(ItemNecesario))
         {
-            ActivarObjeto();
+            InventoryManager.Instancia.EliminarItem(ItemNecesario);
+            Debug.Log("ItemConsumido, Bro");
 
-            // Consumir el objeto si está configurado
-            if (consumirItem)
-            {
-                InventoryManager.Instance.RemoveItem(ItemNecesario);
-            }
+            EjecutarObjeto();
         }
         else
         {
-            MostrarMensaje(messageWithoutItem);
+            MostrarMensaje(mensajeSinItem);
         }
     }
 
 
 
     // Activa el objeto
-    void ActivarObjeto()
+    void EjecutarObjeto()
     {
         estaActivada = true;
-        MostrarMensaje(messageWithItem);
+        MostrarMensaje(mensajeConItem);
 
         // Realiza el comportamiento según el tipo (Gracias Enums por existir)
         switch (tipoInteraccion)
         {
             case TipoInteraccion.Puerta:
-                ActivatePuerta();
+                PuertaEjecucion();
                 break;
 
             case TipoInteraccion.Cuerda:
-                ActivateCuerda();
+                CuerdaEjecucion();
                 break;
         }
 
@@ -154,14 +143,13 @@ public class scr_ObjetoBloqueador : MonoBehaviour
 
    
     // COMPORTAMIENTO DEPENDIENDO EL TIPO DEL MISMO; Ejemplo: Si es puerta, haz esto.
-
     // Comportamiento para puertas
-    void ActivatePuerta()
+    void PuertaEjecucion()
     {
         // Reproducir animación si existe
-        if (objectAnimator != null)
+        if (miAnimator != null)
         {
-            objectAnimator.SetTrigger(activationTrigger);
+            miAnimator.SetTrigger(activaTrigger);
         }
         else
         {
@@ -171,12 +159,12 @@ public class scr_ObjetoBloqueador : MonoBehaviour
     }
 
     //Comportamiento para cuerdas
-    void ActivateCuerda()
+    void CuerdaEjecucion()
     {
         // Reproducir animación si existe
-        if (objectAnimator != null)
+        if (miAnimator != null)
         {
-            objectAnimator.SetTrigger(activationTrigger);
+            miAnimator.SetTrigger(activaTrigger);
         }
         else
         {
@@ -184,13 +172,17 @@ public class scr_ObjetoBloqueador : MonoBehaviour
             gameObject.SetActive(false);
         }
 
-        // AQUÍ puedes añadir lógica adicional:
-        // - Hacer caer objetos con Rigidbody
-        // - Activar partículas
-        // - Reproducir sonido de corte
+        // AQUÍ se debe añadir la lógica. Actualmente es un ejemplo en el que objeto desaparece,
+        // sin embargo, eso dependera del tipo de objeto que tengamos y como queremos que funcione
+        // Podriamos hacer caer objetos anadiendo un Rigidbody
+        // o crear animaciones
+
         // Ejemplo:
         // GameObject objetoColgado = GameObject.Find("ObjetoColgado");
         // objetoColgado.GetComponent<Rigidbody>().useGravity = true;
+        // Debug.Log("El objeto ha caido")
+
+        //En pocas palabras, las funciones de comportamiento son lo que diferencian una puerta de un cuadro que cae.
     }
 
 

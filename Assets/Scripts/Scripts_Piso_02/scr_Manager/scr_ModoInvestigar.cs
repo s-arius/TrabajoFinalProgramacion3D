@@ -1,52 +1,51 @@
 using NUnit.Framework.Interfaces;
 using TMPro;
 using UnityEngine;
+//using static UnityEditor.Progress;
 
-/// <summary>
-/// Controla el modo de investigación donde el jugador puede observar un objeto en 3D.
-/// </summary>
-public class InvestigationMode : MonoBehaviour
+// Controla el modo de investigación donde el jugador puede observar un objeto en 3D.
+public class scr_ModoInvestigar : MonoBehaviour
 {
-    public static InvestigationMode Instance { get; private set; }
+    public static scr_ModoInvestigar Instancia { get; private set; }
 
     [Header("Configuración")]
-    [SerializeField] private Transform investigationPoint; // Punto delante de la cámara
-    [SerializeField] private float rotationSpeed = 100f;
+    [SerializeField] private Transform PuntoInvestigacion_Prefab; // Punto delante de la cámara
+    [SerializeField] private float velocidadRotacion = 1000f;
 
     [Header("Panel de Pensamiento")]
-    [SerializeField] private GameObject thoughtPanel; // Panel que contiene el pensamiento
-    [SerializeField] private TextMeshProUGUI thoughtText; // Texto del pensamiento
+    [SerializeField] private GameObject Panel_Pensamiento; // Panel que contiene el pensamiento
+    [SerializeField] private TextMeshProUGUI Texto_Pensamiento; // Texto del pensamiento
 
 
-    private GameObject currentObject;
-    private bool isInvestigating = false;
+    private GameObject objetoActual;
+    private bool estaInvestigando = false;
 
     void Awake()
     {
-        if (Instance == null)
+        if (Instancia == null)
         {
-            Instance = this;
+            Instancia = this;
         }
         else
         {
             Destroy(gameObject);
         }
 
-        thoughtPanel.SetActive(false);
+        Panel_Pensamiento.SetActive(false);
     }
 
     void Update()
     {
-        if (!isInvestigating) return;
+        if (!estaInvestigando) return;
 
         // Rotar el objeto con el ratón
         if (Input.GetMouseButton(0))
         {
-            float rotX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
-            float rotY = Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
+            float rotX = Input.GetAxis("Mouse X") * velocidadRotacion * Time.deltaTime;
+            float rotY = Input.GetAxis("Mouse Y") * velocidadRotacion * Time.deltaTime;
 
-            currentObject.transform.Rotate(Vector3.up, -rotX, Space.World);
-            currentObject.transform.Rotate(Vector3.right, rotY, Space.World);
+            objetoActual.transform.Rotate(Vector3.up, -rotX, Space.World);
+            objetoActual.transform.Rotate(Vector3.right, rotY, Space.World);
         }
 
         // Salir del modo investigación
@@ -54,6 +53,7 @@ public class InvestigationMode : MonoBehaviour
         {
             ExitInvestigation();
         }
+
     }
 
    
@@ -66,11 +66,11 @@ public class InvestigationMode : MonoBehaviour
             return;
         }
 
-        isInvestigating = true;
+        estaInvestigando = true;
 
         // Crear el objeto delante de la cámara
-        currentObject = Instantiate(item.investigationPrefab, investigationPoint.position, Quaternion.identity);
-        currentObject.transform.SetParent(investigationPoint);
+        objetoActual = Instantiate(item.investigationPrefab, PuntoInvestigacion_Prefab.position, Quaternion.identity);
+        objetoActual.transform.SetParent(PuntoInvestigacion_Prefab);
 
         // Desactivar el movimiento del jugador
         var playerController = Object.FindFirstObjectByType<scr_PlayerMovimiento>(); 
@@ -80,10 +80,10 @@ public class InvestigationMode : MonoBehaviour
         }
 
         //Activar panel y actualizar texto 
-        if (thoughtPanel != null && thoughtText != null && !string.IsNullOrEmpty(item.pensamiento))
+        if (Panel_Pensamiento != null && Panel_Pensamiento != null && !string.IsNullOrEmpty(item.pensamiento))
         {
-            thoughtText.text = item.pensamiento;
-            thoughtPanel.SetActive(true);
+            Texto_Pensamiento.text = item.pensamiento;
+            Panel_Pensamiento.SetActive(true);
         }
         else
         {
@@ -101,14 +101,14 @@ public class InvestigationMode : MonoBehaviour
     
     public void ExitInvestigation()
     {
-        if (!isInvestigating) return;
+        if (!estaInvestigando) return;
 
-        isInvestigating = false;
+        estaInvestigando = false;
 
         // Destruir el objeto
-        if (currentObject != null)
+        if (objetoActual != null)
         {
-            Destroy(currentObject);
+            Destroy(objetoActual);
         }
 
         // Reactivar el movimiento del jugador
@@ -119,9 +119,9 @@ public class InvestigationMode : MonoBehaviour
         }
 
         // Ocultar el panel de pensamiento
-        if (thoughtPanel != null)
+        if (Texto_Pensamiento != null)
         {
-            thoughtPanel.SetActive(false);
+            Panel_Pensamiento.SetActive(false);
         }
 
         // Restaurar el cursor
@@ -131,5 +131,5 @@ public class InvestigationMode : MonoBehaviour
         Debug.Log("Modo investigación desactivado");
     }
 
-    public bool IsInvestigating() => isInvestigating;
+    public bool EstaInvestigando_Funcion() => estaInvestigando;
 }

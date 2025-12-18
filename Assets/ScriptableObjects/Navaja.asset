@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Navaja
   m_EditorClassIdentifier: 
   nombre: Navaja
-  investigationPrefab: {fileID: 2417355222298384666, guid: a14a6c3c2bb018a469131b0f3cb1eaeb, type: 3}
+  investigationPrefab: {fileID: 3866095452837592922, guid: 09dc5c57e383a854e9bdd860f0aad02b, type: 3}
+  icono: {fileID: 21300000, guid: 4bbc409fbdc961c45a3b9ea71eb3d212, type: 3}
   pensamiento: "\"Wow, una navaja suiza \xA1Tremeendooo!!"

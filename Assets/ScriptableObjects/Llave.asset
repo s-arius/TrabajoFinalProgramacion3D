@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b889b74ce7f4df46b57ba63b21b2187, type: 3}
-  m_Name: Llave_Dorada
+  m_Name: Llave
   m_EditorClassIdentifier: 
   nombre: Llave Dorada
-  investigationPrefab: {fileID: 2417355222298384666, guid: 177571c30ec61604e863cb3ba31ea050, type: 3}
-  pensamiento: Hola
-  itemName: Objeto
-  description: ' "Una antigua llave dorada que abre puertas misteriosas"'
+  investigationPrefab: {fileID: 1154360678330972196, guid: fddd48ed084b915479d67aaecc780f3c, type: 3}
+  icono: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  pensamiento: "Ejemplo: \xA1Que llave tan bacana! me pregunto que puerta abrir\xE1"

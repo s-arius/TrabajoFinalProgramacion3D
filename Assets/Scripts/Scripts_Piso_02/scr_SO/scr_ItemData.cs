@@ -7,10 +7,12 @@ public class scr_ItemData : ScriptableObject
 {
 
     public string nombre;
+
     public GameObject investigationPrefab;
 
-    [TextArea(2,2)]
-    public string pensamiento;
+    public Sprite icono;
+
+    [TextArea(2,2)] public string pensamiento;
 
   
 }
