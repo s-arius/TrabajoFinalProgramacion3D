@@ -2,34 +2,30 @@ using UnityEngine;
 
 public class CamaraSeguir : MonoBehaviour
 {
-    public Transform jugador;
+    [Header("Referencia")]
+    public Camera camaraFPS;
 
-    public Vector3 offsetNormal = new Vector3(0, 5, -7);
-    public Vector3 offsetColocacion = new Vector3(0, 2, -3);
-
-    public float suavizado = 5f;
+    [Header("Keypad")]
+    public Vector3 offsetColocacion = new Vector3(0f, 0f, -1f);
+    public float suavizado = 8f;
 
     private bool enColocacion = false;
     private Transform slotActual;
 
     void LateUpdate()
     {
-        Vector3 objetivo;
-        Vector3 mirar;
+        if (!enColocacion || slotActual == null)
+            return;
 
-        if (enColocacion && slotActual != null)
-        {
-            objetivo = slotActual.position + offsetColocacion;
-            mirar = slotActual.position;
-        }
-        else
-        {
-            objetivo = jugador.position + offsetNormal;
-            mirar = jugador.position;
-        }
+        Vector3 objetivo = slotActual.position + offsetColocacion;
 
-        transform.position = Vector3.Lerp(transform.position, objetivo, suavizado * Time.deltaTime);
-        transform.LookAt(mirar);
+        camaraFPS.transform.position = Vector3.Lerp(
+            camaraFPS.transform.position,
+            objetivo,
+            suavizado * Time.deltaTime
+        );
+
+        camaraFPS.transform.LookAt(slotActual.position);
     }
 
     public void ActivarColocacion(Transform slot)

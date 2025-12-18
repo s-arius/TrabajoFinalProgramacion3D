@@ -2,26 +2,39 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float velocidad = 5f;
+    public float speed = 5f;
+    public float mouseSensitivity = 100f;
     public bool tengoTecla = false;
 
-    private Rigidbody rb;
+
+    private CharacterController controller;
+    private float xRotation = 0f;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
+        controller = GetComponent<CharacterController>();
+        Cursor.lockState = CursorLockMode.Locked;
 
-        // Recuperar estado global
         tengoTecla = GameManagerGlobal.Instance.teclaRecogida;
+
     }
 
-    void FixedUpdate()
+    void Update()
     {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
+        Vector3 move = transform.right * h + transform.forward * v;
+        controller.Move(move * speed * Time.deltaTime);
 
-        Vector3 mov = new Vector3(h, 0, v);
-        rb.MovePosition(rb.position + mov * velocidad * Time.fixedDeltaTime);
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+
+        Camera cam = GetComponentInChildren<Camera>();
+        cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        transform.Rotate(Vector3.up * mouseX);
     }
 }
