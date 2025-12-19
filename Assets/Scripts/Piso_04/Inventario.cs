@@ -14,12 +14,12 @@ public class Inventario : MonoBehaviour
         if (itemName.ToLower() == "llave")
         {
             hasKey = true;
-            Debug.Log("Tienes una llave");
+            Debug.Log("tienes una llave");
         }
         else if (itemName.ToLower() == "tecla")
         {
             hasTecla = true;
-            Debug.Log("Has recogido la tecla para el keypad");
+            Debug.Log("has recogido la tecla para el keypad");
         }
     }
     

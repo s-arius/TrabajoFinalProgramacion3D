@@ -11,7 +11,8 @@ public class scr_ObjetoBloqueador : MonoBehaviour
     public enum TipoInteraccion
     {
         Puerta,
-        Cuerda
+        Cuerda,
+        Maletin
     }
 
     [Header("Tipo de Objeto")]
@@ -45,6 +46,8 @@ public class scr_ObjetoBloqueador : MonoBehaviour
     private bool enRango = false;
     private bool estaActivada = false;
     //private float mensajeTimer = 0f;
+
+
 
     void Start()
     {
@@ -102,7 +105,14 @@ public class scr_ObjetoBloqueador : MonoBehaviour
             case TipoInteraccion.Cuerda:
                 CuerdaEjecucion();
                 break;
+
+        /*
+            case TipoInteraccion.Maletin:
+                MaletinEjecucion();
+                break;
+        */
         }
+
 
         Debug.Log($"¡{tipoInteraccion} activado!");
     }
@@ -172,6 +182,9 @@ public class scr_ObjetoBloqueador : MonoBehaviour
             gameObject.SetActive(false);
         }
 
+
+    
+
         // AQUÍ se debe añadir la lógica. Actualmente es un ejemplo en el que objeto desaparece,
         // sin embargo, eso dependera del tipo de objeto que tengamos y como queremos que funcione
         // Podriamos hacer caer objetos anadiendo un Rigidbody
@@ -185,5 +198,15 @@ public class scr_ObjetoBloqueador : MonoBehaviour
         //En pocas palabras, las funciones de comportamiento son lo que diferencian una puerta de un cuadro que cae.
     }
 
+    /*
+        void MaletinEjecucion()
+                {
+            //maletinCerrado.SetActive(false);
+            //maletinAbierto.SetActive(true);
+        //llamar al script de maletin directamente
 
+
+        }
+
+*/
 }

@@ -6,6 +6,8 @@ public class Maletin : MonoBehaviour
     public GameObject maletinCerrado;
     public GameObject maletinAbierto; 
 
+    public GameObject botonEsc;
+
     //audios
     public AudioSource audioCerrado;
     public AudioSource audioAbierto;
@@ -32,12 +34,12 @@ public class Maletin : MonoBehaviour
 
     void Update()
     {
-        if (jugadorCerca && Input.GetKeyDown(KeyCode.F))
+        if (jugadorCerca && Input.GetKeyDown(KeyCode.E))
         {
             if (!estaAbierto)
             {
 
-                TryOpen();
+                IntentarAbrir();
             }
             else
             {
@@ -51,21 +53,21 @@ public class Maletin : MonoBehaviour
         }
     }
 
-    void TryOpen()
+    void IntentarAbrir()
     {
         if (inventario != null && inventario.hasKey)
         {
-            OpenCase();
+            abrirMaletin();
         }
         else
         {
             if (audioCerrado != null)
                 audioCerrado.Play();
-            Debug.Log("Necesitas la llave para abrir el maletín");
+            Debug.Log("necesitas la llave para abrir el maletin");
         }
     }
 
-    void OpenCase()
+    void abrirMaletin()
     {
         estaAbierto = true;
         maletinCerrado.SetActive(false);
@@ -74,7 +76,7 @@ public class Maletin : MonoBehaviour
         if (audioAbierto != null)
             audioAbierto.Play();
             
-        Debug.Log("¡Maletín abierto!");
+        Debug.Log("maletin abiertoo");
     }
 
     void ToggleNota()
@@ -85,11 +87,11 @@ public class Maletin : MonoBehaviour
         }
         else
         {
-            MostrarNota();
+            VerNota();
         }
     }
     
-    void MostrarNota()
+    void VerNota()
     {
         if (panelNota != null)
         {
@@ -97,7 +99,11 @@ public class Maletin : MonoBehaviour
             panelNota.SetActive(true);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
-            Debug.Log("Nota mostrada en pantalla");
+
+
+            JugadorQuieto(true);
+
+
         }
     }
     
@@ -109,7 +115,11 @@ public class Maletin : MonoBehaviour
             panelNota.SetActive(false);
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            Debug.Log("Nota oculta");
+
+
+
+        JugadorQuieto(false);
+
         }
     }
 
@@ -119,12 +129,28 @@ public class Maletin : MonoBehaviour
         {
             jugadorCerca = true;
             if (!estaAbierto)
-                Debug.Log("Pulsa F para abrir el maletín");
+                Debug.Log("E para abrir maletin");
             else
-                Debug.Log("Pulsa F para ver la nota");
+                Debug.Log("E para ver la nota");
         }
     }
 
+    void JugadorQuieto(bool bloquear)
+{
+    GameObject jugador = GameObject.FindGameObjectWithTag("Player");
+    
+    if (jugador != null)
+    {
+        CharacterController controller = jugador.GetComponent<CharacterController>();
+        if (controller != null)
+        {
+            controller.enabled = !bloquear;
+        }
+    }
+}
+
+
+/*
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -135,4 +161,5 @@ public class Maletin : MonoBehaviour
                 OcultarNota();
         }
     }
+    */
 }
