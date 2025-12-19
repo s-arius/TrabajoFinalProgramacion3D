@@ -1,8 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManagerGlobal : MonoBehaviour
 {
     public static GameManagerGlobal Instance;
+
+    [HideInInspector] public UnityEvent CambiodeLuces_Evento; //Pablo
+
 
     [Header("Estado global de la llave")]
     public bool teclaRecogida = false;   // true si ya recogiste la tecla

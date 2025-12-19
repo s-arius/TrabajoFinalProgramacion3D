@@ -8,7 +8,7 @@ using UnityEngine;
 public class ItemDesbloqueador : MonoBehaviour
 {
     [Header("Datos del Objeto")]
-    [SerializeField] private scr_ItemData scr_ItemData;
+    [SerializeField] private scr_ItemData itemData_SO;
 
     [Header("Configuración")]
     [SerializeField] private KeyCode teclaInteraccion= KeyCode.E;
@@ -41,7 +41,7 @@ public class ItemDesbloqueador : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             estaEnRango = true;
-            Debug.Log($"Presiona {teclaInteraccion} para recoger: {scr_ItemData.nombre}");
+            Debug.Log($"Presiona {teclaInteraccion} para recoger: {itemData_SO.nombre}");
             panel_Interactuar.SetActive(true);
         }
     }
@@ -60,10 +60,10 @@ public class ItemDesbloqueador : MonoBehaviour
     void Recoger()
     {
         // Añadir al inventario
-        InventoryManager.Instancia.agregarItem(scr_ItemData);
+        InventoryManager.Instancia.agregarItem(itemData_SO);
 
         // Activar modo investigación
-        scr_ModoInvestigar.Instancia.StartInvestigation(scr_ItemData);
+        scr_ModoInvestigar.Instancia.StartInvestigation(itemData_SO);
 
         // Destruir el objeto del mundo
         Destroy(gameObject);
