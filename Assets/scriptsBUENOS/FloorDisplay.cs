@@ -1,37 +1,42 @@
 using UnityEngine;
-using TMPro;
+using TMPro; // Si usas TextMeshPro para mostrar el piso
 
 public class FloorDisplay : MonoBehaviour
 {
-    public int currentFloor = 100;   // piso inicial
-    public int minFloor = 92;        // piso mínimo
-    public int maxFloor = 100;       // piso máximo
-
-    public TextMeshPro textMesh;     // asigna tu TextMeshPro del objeto 3D
-    public ElevatorDataSO elevatorData; // referencia al ScriptableObject
+    public ElevatorController elevator; // Referencia al ascensor
+    public TextMeshProUGUI floorText;   // Texto que muestra el piso
 
     void Start()
     {
-        // Cargar el piso guardado solo durante la ejecución
-        if (elevatorData != null && elevatorData.HasTemporaryData)
-            currentFloor = Mathf.Clamp(elevatorData.LoadFloor(), minFloor, maxFloor);
+        if (elevator == null)
+        {
+            Debug.LogError("[FloorDisplay] No se ha asignado el ElevatorController");
+            return;
+        }
 
-        UpdateText();
+        // Inicializar texto con el valor del GameManager
+        if (GameManager.Instance != null)
+        {
+            elevator.currentFloor = GameManager.Instance.currentFloor;
+            UpdateFloorText();
+        }
     }
 
-    public void SetFloor(int floor)
+    void Update()
     {
-        currentFloor = Mathf.Clamp(floor, minFloor, maxFloor);
-        UpdateText();
+        if (elevator.currentFloor != GameManager.Instance.currentFloor)
+        {
+            // Guardar piso en GameManager
+            GameManager.Instance.currentFloor = elevator.currentFloor;
 
-        // Guardar piso temporalmente
-        if (elevatorData != null)
-            elevatorData.SaveTemporaryFloor(currentFloor);
+            // Actualizar texto en pantalla
+            UpdateFloorText();
+        }
     }
 
-    void UpdateText()
+    void UpdateFloorText()
     {
-        if (textMesh != null)
-            textMesh.text = currentFloor.ToString();
+        if (floorText != null)
+            floorText.text = $"Piso: {elevator.currentFloor}";
     }
 }

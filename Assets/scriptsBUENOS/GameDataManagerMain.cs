@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,18 +11,34 @@ public class GameManager : MonoBehaviour
     [Header("Estado del jugador")]
     public float playerY = 0f; // Posición Y del jugador
 
+    [Header("Progreso especial")]
+    public bool hasReachedFloor92 = false;
+
+    [Header("Cristales limpiados")]
+    public HashSet<string> cleanedCrystals = new HashSet<string>();
+
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // Persiste entre escenas
+            DontDestroyOnLoad(gameObject);
             Debug.Log("[GameManager] Creado y persistente.");
         }
         else
         {
             Destroy(gameObject);
-            Debug.Log("[GameManager] Duplicado destruido.");
         }
+    }
+
+    public void RegisterCleanedCrystal(string crystalID)
+    {
+        if (!cleanedCrystals.Contains(crystalID))
+            cleanedCrystals.Add(crystalID);
+    }
+
+    public bool IsCrystalCleaned(string crystalID)
+    {
+        return cleanedCrystals.Contains(crystalID);
     }
 }

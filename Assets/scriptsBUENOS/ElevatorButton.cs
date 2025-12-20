@@ -15,10 +15,10 @@ public class ElevatorButton : MonoBehaviour
         else
             elevator.MoveDown();
 
-        // Actualizar visualización del piso y guardar
+        // Actualizar visualizaciï¿½n del piso y guardar
         if (floorDisplay != null)
         {
-            floorDisplay.SetFloor(elevator.currentFloor);
+            //floorDisplay.SetFloor(elevator.currentFloor);
         }
     }
 }

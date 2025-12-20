@@ -27,8 +27,7 @@ public class CrystalEraseUnlocker : MonoBehaviour
     [Header("Objetos a destruir al completar borrado")]
     public List<GameObject> objectsToDestroy = new List<GameObject>();
 
-    [Header("Guardado opcional")]
-    public EraseDataSO eraseData;
+    [Header("Identificador único del cristal")]
     public string objectID;
 
     private RenderTexture eraseMask;
@@ -46,6 +45,17 @@ public class CrystalEraseUnlocker : MonoBehaviour
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
 
+        // 🧠 SI YA ESTÁ LIMPIO SEGÚN EL GAMEMANAGER → NO APARECE
+        if (!string.IsNullOrEmpty(objectID) &&
+            GameManager.Instance != null &&
+            GameManager.Instance.IsCrystalCleaned(objectID))
+        {
+            Debug.Log($"🧼 Cristal ya limpio al cargar escena: {objectID}");
+            DestroyObjectsInstant();
+            return;
+        }
+
+        // Crear máscara de borrado
         eraseMask = new RenderTexture(1024, 1024, 0, RenderTextureFormat.R8);
         eraseMask.Create();
         RenderTexture.active = eraseMask;
@@ -55,6 +65,7 @@ public class CrystalEraseUnlocker : MonoBehaviour
         eraseMaskID = Shader.PropertyToID("_EraseMask");
         crystalMaterial.SetTexture(eraseMaskID, eraseMask);
 
+        // Crear pincel
         brush = new Texture2D(64, 64, TextureFormat.RGBA32, false);
         for (int y = 0; y < brush.height; y++)
         {
@@ -63,20 +74,12 @@ public class CrystalEraseUnlocker : MonoBehaviour
                 float dx = (x - brush.width / 2f) / (brush.width / 2f);
                 float dy = (y - brush.height / 2f) / (brush.height / 2f);
                 float d = Mathf.Sqrt(dx * dx + dy * dy);
-
                 brush.SetPixel(x, y, d <= 1f ? new Color(0, 0, 0, eraseStrength) : Color.clear);
             }
         }
         brush.Apply();
 
         readbackTex = new Texture2D(128, 128, TextureFormat.R8, false);
-
-        // Si ya estaba desbloqueado en ScriptableObject
-        if (eraseData != null && eraseData.GetErased(objectID))
-        {
-            unlocked = true;
-            DestroyObjects();
-        }
     }
 
     void Update()
@@ -166,6 +169,7 @@ public class CrystalEraseUnlocker : MonoBehaviour
 
         Color32[] pixels = readbackTex.GetPixels32();
         int erased = 0;
+
         foreach (Color32 c in pixels)
         {
             if (c.r < 20)
@@ -183,8 +187,9 @@ public class CrystalEraseUnlocker : MonoBehaviour
         if (unlocked) return;
         unlocked = true;
 
-        if (eraseData != null)
-            eraseData.SetErased(objectID, true);
+        // 🧠 GUARDAR CRISTAL COMO LIMPIO EN EL GAMEMANAGER
+        if (!string.IsNullOrEmpty(objectID) && GameManager.Instance != null)
+            GameManager.Instance.RegisterCleanedCrystal(objectID);
 
         cursor?.DeactivateCursor();
         StopEffects();
@@ -201,7 +206,20 @@ public class CrystalEraseUnlocker : MonoBehaviour
         if (unlockClip != null)
             audioSource.PlayOneShot(unlockClip, unlockVolume);
 
-        Debug.Log($"🔓 Material completado: {objectID}");
+        Debug.Log($"🔓 Cristal limpiado y guardado: {objectID}");
+    }
+
+    void DestroyObjectsInstant()
+    {
+        unlocked = true;
+
+        foreach (GameObject obj in objectsToDestroy)
+        {
+            if (obj != null)
+                Destroy(obj);
+        }
+
+        Destroy(gameObject);
     }
 
     void PlayEraseEffects()
