@@ -25,6 +25,10 @@ public class CrystalEraser : MonoBehaviour
 
     [Range(0f, 1f)] public float eraseStrength = 1f;
 
+    [Header("Sistema de guardado")]
+    public EraseDataSO eraseData;  // ScriptableObject para guardar estado
+    public string objectID;         // ID único del objeto
+
     private AudioSource audioSource;
 
     RenderTexture eraseMask;
@@ -80,6 +84,20 @@ public class CrystalEraser : MonoBehaviour
         brush.Apply();
 
         readbackTex = new Texture2D(128, 128, TextureFormat.R8, false);
+
+        // Si ya estaba destruido, aplicamos efecto
+        if (eraseData != null && eraseData.GetErased(objectID))
+        {
+            destroyed = true;
+            foreach (GameObject obj in objectsToDestroy)
+            {
+                if (obj != null)
+                    Destroy(obj);
+            }
+
+            if (elevator != null)
+                elevator.UnlockCurrentFloor();
+        }
     }
 
     void Update()
@@ -109,10 +127,10 @@ public class CrystalEraser : MonoBehaviour
             staminaSystem.isErasing = false;
     }
 
+    // ✅ Ray desde el centro de la cámara
     Ray CreateRayFromCenter()
     {
-        Vector2 center = new Vector2(Screen.width / 2f, Screen.height / 2f);
-        return playerCamera.ScreenPointToRay(center);
+        return playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
     }
 
     void TryStartErasing()
@@ -191,6 +209,10 @@ public class CrystalEraser : MonoBehaviour
     {
         if (destroyed) return;
         destroyed = true;
+
+        // Guardar estado
+        if (eraseData != null)
+            eraseData.SetErased(objectID, true);
 
         StopEffects();
         cursor?.DeactivateCursor();
