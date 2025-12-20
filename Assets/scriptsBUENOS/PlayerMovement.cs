@@ -27,6 +27,15 @@ public class PlayerMovement : MonoBehaviour
         // Bloquear cursor al iniciar
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        // Restaurar posición Y desde GameManager si existe
+        if (GameManager.Instance != null)
+        {
+            Vector3 pos = transform.position;
+            pos.y = GameManager.Instance.playerY; // solo la altura
+            transform.position = pos;
+            Debug.Log($"[Player] Posición Y restaurada: {pos.y}");
+        }
     }
 
     void Update()
@@ -49,13 +58,10 @@ public class PlayerMovement : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        // Rotar la cámara en el eje vertical (mirar arriba/abajo)
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
 
         cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
-        // Rotar el jugador en el eje horizontal (girar izquierda/derecha)
         transform.Rotate(Vector3.up * mouseX);
     }
 
@@ -68,7 +74,6 @@ public class PlayerMovement : MonoBehaviour
         Vector3 right = cameraTransform.right;
 
         Vector3 move = (forward * v + right * h).normalized;
-
         float speed = Input.GetKey(KeyCode.LeftShift) ? runSpeed : walkSpeed;
 
         controller.Move(move * speed * Time.deltaTime);
@@ -82,8 +87,6 @@ public class PlayerMovement : MonoBehaviour
     {
         inputLocked = true;
         velocity = Vector3.zero;
-
-        // Liberar el cursor
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -92,11 +95,19 @@ public class PlayerMovement : MonoBehaviour
     {
         inputLocked = false;
         velocity = Vector3.zero;
-
-        // Bloquear cursor de nuevo
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        Debug.Log("Movimiento reactivado");
+        Debug.Log("[Player] Movimiento reactivado");
+    }
+
+    void OnDisable()
+    {
+        // Guardar posición Y en GameManager al desactivar o cambiar de escena
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.playerY = transform.position.y;
+            Debug.Log($"[Player] Posición Y guardada: {transform.position.y}");
+        }
     }
 }

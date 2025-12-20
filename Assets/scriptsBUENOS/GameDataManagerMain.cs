@@ -1,25 +1,27 @@
 using UnityEngine;
 
-public class GameDataManager : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public static GameDataManager Instance;
+    public static GameManager Instance;
 
     [Header("Estado del ascensor")]
-    public int currentFloor;
+    public int currentFloor = 100; // Piso inicial por defecto
 
-    [Header("Estado de borrado de cristales")]
-    public bool[] crystalErased; // un array donde cada Ìndice representa un cristal
+    [Header("Estado del jugador")]
+    public float playerY = 0f; // Posici√≥n Y del jugador
 
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // persiste entre escenas
+            DontDestroyOnLoad(gameObject); // Persiste entre escenas
+            Debug.Log("[GameManager] Creado y persistente.");
         }
         else
         {
             Destroy(gameObject);
+            Debug.Log("[GameManager] Duplicado destruido.");
         }
     }
 }

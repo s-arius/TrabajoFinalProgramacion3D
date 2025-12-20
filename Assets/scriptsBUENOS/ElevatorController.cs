@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class ElevatorController : MonoBehaviour
 {
@@ -7,22 +7,38 @@ public class ElevatorController : MonoBehaviour
     public float moveSpeed = 5f;
 
     [Header("Sonidos")]
-    public AudioSource errorSound;   // ❌ error al intentar mover sin desbloqueo
+    public AudioSource errorSound;
 
+    [Header("Configuración inicial")]
+    public int startFloor = 100;
+
+    private Vector3 basePosition;
     private Vector3 targetPosition;
-    private Vector3 initialPosition;
 
-    public int currentFloor = 100;
-    public int maxDown = 8;
+    public int currentFloor;
     private int downCount = 0;
+    public int maxDown = 8;
 
-    // Registro de qué plantas tienen el cristal borrado
     private HashSet<int> unlockedFloors = new HashSet<int>();
+
+    void Awake()
+    {
+        basePosition = transform.position;
+        targetPosition = basePosition;
+    }
 
     void Start()
     {
-        targetPosition = transform.position;
-        initialPosition = transform.position;
+        // Restaurar el piso desde GameManager
+        if (GameManager.Instance != null)
+            currentFloor = GameManager.Instance.currentFloor;
+
+        // Ajustar posición según el piso
+        int offset = currentFloor - startFloor;
+        targetPosition = basePosition + Vector3.up * moveDistance * offset;
+        transform.position = targetPosition;
+
+        Debug.Log($"[Elevator] Posición inicial ajustada a piso {currentFloor}.");
     }
 
     void Update()
@@ -32,39 +48,26 @@ public class ElevatorController : MonoBehaviour
 
     public void MoveUp()
     {
-        int nextFloor = currentFloor + 1;
-
-        // Solo permite subir si la planta actual está desbloqueada
         if (!unlockedFloors.Contains(currentFloor))
         {
             PlayError();
-            Debug.Log("❌ Debes borrar el cristal de esta planta antes de subir.");
             return;
         }
 
-        if (downCount > 0)
-        {
-            targetPosition += Vector3.up * moveDistance;
-            downCount--;
-            currentFloor++;
+        targetPosition += Vector3.up * moveDistance;
+        currentFloor++;
 
-            Debug.Log($"⬆ Subiste a la planta {currentFloor}");
-        }
-        else
-        {
-            Debug.Log("⛔ Ya estás en la planta superior.");
-        }
+        if (GameManager.Instance != null)
+            GameManager.Instance.currentFloor = currentFloor;
+
+        Debug.Log($"[Elevator] Subiendo a piso {currentFloor}");
     }
 
     public void MoveDown()
     {
-        int nextFloor = currentFloor - 1;
-
-        // Solo permite bajar si la planta actual está desbloqueada
         if (!unlockedFloors.Contains(currentFloor))
         {
             PlayError();
-            Debug.Log("❌ Debes borrar el cristal de esta planta antes de bajar.");
             return;
         }
 
@@ -74,27 +77,24 @@ public class ElevatorController : MonoBehaviour
             downCount++;
             currentFloor--;
 
-            Debug.Log($"⬇ Bajaste a la planta {currentFloor}");
-        }
-        else
-        {
-            Debug.Log("⛔ Límite inferior alcanzado.");
+            if (GameManager.Instance != null)
+                GameManager.Instance.currentFloor = currentFloor;
+
+            Debug.Log($"[Elevator] Bajando a piso {currentFloor}");
         }
     }
 
-    // Método que llama CrystalEraseUnlocker cuando se borra el cristal
     public void UnlockCurrentFloor()
     {
-        if (!unlockedFloors.Contains(currentFloor))
-        {
-            unlockedFloors.Add(currentFloor);
-            Debug.Log($"🔓 Planta {currentFloor} desbloqueada.");
-        }
+        unlockedFloors.Add(currentFloor);
+        Debug.Log($"[Elevator] Piso {currentFloor} desbloqueado.");
     }
 
     private void PlayError()
     {
         if (errorSound != null && !errorSound.isPlaying)
             errorSound.Play();
+
+        Debug.Log("[Elevator] Error: Piso no desbloqueado.");
     }
 }

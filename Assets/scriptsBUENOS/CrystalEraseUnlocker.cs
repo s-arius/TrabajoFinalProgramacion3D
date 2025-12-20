@@ -27,7 +27,7 @@ public class CrystalEraseUnlocker : MonoBehaviour
     [Header("Objetos a destruir al completar borrado")]
     public List<GameObject> objectsToDestroy = new List<GameObject>();
 
-    [Header("Guardado (ScriptableObject opcional)")]
+    [Header("Guardado opcional")]
     public EraseDataSO eraseData;
     public string objectID;
 
@@ -183,7 +183,6 @@ public class CrystalEraseUnlocker : MonoBehaviour
         if (unlocked) return;
         unlocked = true;
 
-        // Guardar estado
         if (eraseData != null)
             eraseData.SetErased(objectID, true);
 
@@ -199,11 +198,10 @@ public class CrystalEraseUnlocker : MonoBehaviour
         if (elevator != null)
             elevator.UnlockCurrentFloor();
 
-        // Sonido de desbloqueo
         if (unlockClip != null)
             audioSource.PlayOneShot(unlockClip, unlockVolume);
 
-        Debug.Log("🔓 Material completado y objetos destruidos");
+        Debug.Log($"🔓 Material completado: {objectID}");
     }
 
     void PlayEraseEffects()
