@@ -33,7 +33,7 @@ public class ColocarTecla : MonoBehaviour
             canvasKeypadUI.SetActive(false);
 
         // Recuperamos estado global
-        teclaColocada = GameManagerGlobal.Instance.lucesApagadas;
+        teclaColocada = GameManagerGlobal.Instance.teclaColocada;
 
         // Si la tecla ya fue colocada, activamos el objeto automáticamente
         if (teclaColocada && objetoVisibleTrasTecla != null)
@@ -55,11 +55,10 @@ public class ColocarTecla : MonoBehaviour
     void ColocarTeclaEnSlot()
     {
         teclaColocada = true;
-
-        // Guardamos estado global
-        GameManagerGlobal.Instance.lucesApagadas = true;
+        GameManagerGlobal.Instance.teclaColocada = true; // ⚠ independiente de luces
 
         // Apagar luces
+        GameManagerGlobal.Instance.lucesApagadas = true;
         controladorLuces.ApagarLuces();
 
         // Ocultar cartel y UI
@@ -88,7 +87,6 @@ public class ColocarTecla : MonoBehaviour
         jugador = other.GetComponent<Player>();
         jugadorCerca = true;
 
-        // Mostrar cartel solo si el jugador tiene la tecla
         if (!teclaColocada &&
             jugador != null &&
             jugador.tengoTecla &&
@@ -97,15 +95,12 @@ public class ColocarTecla : MonoBehaviour
             cartelColocarTecla.SetActive(true);
         }
 
-        // Activar cámara en el keypad
         if (camara != null)
             camara.ActivarColocacion(transform);
 
-        // Activar UI del keypad
         if (canvasKeypadUI != null && !GameManagerGlobal.Instance.lucesApagadas)
             canvasKeypadUI.SetActive(true);
 
-        // Pasamos referencias al script del keypad
         if (keypadUI != null)
         {
             keypadUI.jugador = jugador;

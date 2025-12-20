@@ -1,20 +1,8 @@
 using UnityEngine;
-using UnityEngine.UI;
-using System.Collections.Generic;
+using System.Collections;
 
 public class KeypadUI : MonoBehaviour
 {
-    [System.Serializable]
-    public class BotonInfo
-    {
-        public Button boton;
-        public string valor;
-    }
-
-    [Header("Botones del keypad")]
-    public List<BotonInfo> botones;
-    public BotonInfo botonExtra; // Aparece solo si la tecla se ha colocado
-
     [Header("Código correcto")]
     public string codigoCorrecto = "1234";
 
@@ -28,54 +16,47 @@ public class KeypadUI : MonoBehaviour
     public GameObject mensajeCorrecto;
     public GameObject mensajeIncorrecto;
 
+    [Header("Animaciones")]
+    public Animator animacionObjeto; // Asignar en inspector
+    public string animacionInicial = "PuertaFinal";
+    public string animacionFinal = "PuertaAbierta";
+
     [Header("Estado de la llave")]
     public bool teclaColocada = false; // true si ya se colocó la tecla
 
     private string codigoActual = "";
+    private bool animacionReproducida = false; // Para que solo ocurra 1 vez
 
     void Start()
     {
-        foreach (var bi in botones)
-        {
-            if (bi.boton != null)
-            {
-                Button temp = bi.boton;
-                string valorTemp = bi.valor;
-                temp.onClick.AddListener(() => PulsarBoton(valorTemp));
-            }
-        }
-
-        if (botonExtra != null && botonExtra.boton != null)
-        {
-            botonExtra.boton.gameObject.SetActive(false);
-            string valorTemp = botonExtra.valor;
-            botonExtra.boton.onClick.AddListener(() => PulsarBoton(valorTemp));
-        }
-
-        if (mensajeCorrecto != null)
-            mensajeCorrecto.SetActive(false);
-        if (mensajeIncorrecto != null)
-            mensajeIncorrecto.SetActive(false);
+        if (mensajeCorrecto != null) mensajeCorrecto.SetActive(false);
+        if (mensajeIncorrecto != null) mensajeIncorrecto.SetActive(false);
     }
 
     void Update()
     {
-        // Mostrar botón extra solo si la tecla ya se colocó
-        if (botonExtra != null && botonExtra.boton != null)
-            botonExtra.boton.gameObject.SetActive(teclaColocada);
+        LeerTecladoNumerico();
     }
 
-    void PulsarBoton(string valor)
+    void LeerTecladoNumerico()
     {
-        Debug.Log($"Botón pulsado: {valor}");
-
+        // No permitir introducir código si la luz está apagada
         if (controladorLuces != null && GameManagerGlobal.Instance.lucesApagadas)
-        {
-            Debug.Log($"La luz está apagada. El botón {valor} no funciona.");
             return;
-        }
 
-        Debug.Log($"Botón {valor} aceptado, añadiendo al código.");
+        // Teclas del 1 al 9
+        for (int i = 1; i <= 9; i++)
+        {
+            if (Input.GetKeyDown(i.ToString()) || Input.GetKeyDown((KeyCode)((int)KeyCode.Keypad1 + i - 1)))
+            {
+                PulsarNumero(i.ToString());
+            }
+        }
+    }
+
+    void PulsarNumero(string valor)
+    {
+        Debug.Log($"Número pulsado: {valor}");
         codigoActual += valor;
 
         if (codigoActual.Length >= codigoCorrecto.Length)
@@ -83,17 +64,40 @@ public class KeypadUI : MonoBehaviour
             if (codigoActual == codigoCorrecto)
             {
                 Debug.Log("Código correcto!");
-                if (mensajeCorrecto != null)
-                    mensajeCorrecto.SetActive(true);
+                if (mensajeCorrecto != null) mensajeCorrecto.SetActive(true);
+
+                // Reproducir animación una sola vez
+                if (!animacionReproducida && animacionObjeto != null)
+                {
+                    animacionReproducida = true;
+                    StartCoroutine(ReproducirAnimaciones());
+                }
             }
             else
             {
                 Debug.Log("Código incorrecto.");
-                if (mensajeIncorrecto != null)
-                    mensajeIncorrecto.SetActive(true);
+                if (mensajeIncorrecto != null) mensajeIncorrecto.SetActive(true);
             }
 
             codigoActual = "";
         }
+    }
+
+    private IEnumerator ReproducirAnimaciones()
+    {
+        // Reproducir animación inicial
+        animacionObjeto.Play(animacionInicial);
+
+        // Esperar a que termine la animación inicial
+        AnimatorStateInfo stateInfo;
+        do
+        {
+            yield return null;
+            stateInfo = animacionObjeto.GetCurrentAnimatorStateInfo(0);
+        } while (stateInfo.IsName(animacionInicial) && stateInfo.normalizedTime < 1f);
+
+        // Reproducir animación final
+        animacionObjeto.Play(animacionFinal);
+        Debug.Log("Animación final reproducida: puerta abierta permanentemente.");
     }
 }

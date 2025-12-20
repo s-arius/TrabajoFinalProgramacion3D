@@ -5,24 +5,24 @@ public class GameManagerGlobal : MonoBehaviour
 {
     public static GameManagerGlobal Instance;
 
-    [HideInInspector] public UnityEvent CambiodeLuces_Evento; //Pablo
-
+    [HideInInspector] public UnityEvent CambiodeLuces_Evento;
 
     [Header("Estado global de la llave")]
     public bool teclaRecogida = false;   // true si ya recogiste la tecla
     public bool lucesApagadas = false;   // true si la luz ya fue apagada
+    public bool teclaColocada = false;   // true si la tecla ya se colocó
+    public bool objetoVisible = false;   // true si el objeto ya apareció
 
     private void Awake()
     {
-        // Singleton: solo una instancia
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject); // No se destruye al cambiar de escena
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject); // Destruye duplicados
+            Destroy(gameObject);
         }
     }
 }
