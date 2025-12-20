@@ -22,10 +22,15 @@ public class KeypadUI : MonoBehaviour
     public string animacionFinal = "PuertaAbierta";
 
     [Header("Estado de la llave")]
-    public bool teclaColocada = false; // true si ya se colocó la tecla
+    public bool teclaColocada = false;
+
+    [Header("Sonidos")]
+    public AudioSource audioSource;        // AudioSource del objeto
+    public AudioClip sonidoCorrecto;       // Sonido al acertar
+    public AudioClip sonidoIncorrecto;     // Sonido al fallar
 
     private string codigoActual = "";
-    private bool animacionReproducida = false; // Para que solo ocurra 1 vez
+    private bool animacionReproducida = false;
 
     void Start()
     {
@@ -44,10 +49,10 @@ public class KeypadUI : MonoBehaviour
         if (controladorLuces != null && GameManagerGlobal.Instance.lucesApagadas)
             return;
 
-        // Teclas del 1 al 9
         for (int i = 1; i <= 9; i++)
         {
-            if (Input.GetKeyDown(i.ToString()) || Input.GetKeyDown((KeyCode)((int)KeyCode.Keypad1 + i - 1)))
+            if (Input.GetKeyDown(i.ToString()) ||
+                Input.GetKeyDown((KeyCode)((int)KeyCode.Keypad1 + i - 1)))
             {
                 PulsarNumero(i.ToString());
             }
@@ -64,9 +69,13 @@ public class KeypadUI : MonoBehaviour
             if (codigoActual == codigoCorrecto)
             {
                 Debug.Log("Código correcto!");
+
                 if (mensajeCorrecto != null) mensajeCorrecto.SetActive(true);
 
-                // Reproducir animación una sola vez
+                // 🔊 Sonido correcto
+                if (audioSource != null && sonidoCorrecto != null)
+                    audioSource.PlayOneShot(sonidoCorrecto);
+
                 if (!animacionReproducida && animacionObjeto != null)
                 {
                     animacionReproducida = true;
@@ -76,7 +85,12 @@ public class KeypadUI : MonoBehaviour
             else
             {
                 Debug.Log("Código incorrecto.");
+
                 if (mensajeIncorrecto != null) mensajeIncorrecto.SetActive(true);
+
+                // 🔊 Sonido incorrecto
+                if (audioSource != null && sonidoIncorrecto != null)
+                    audioSource.PlayOneShot(sonidoIncorrecto);
             }
 
             codigoActual = "";
@@ -85,19 +99,17 @@ public class KeypadUI : MonoBehaviour
 
     private IEnumerator ReproducirAnimaciones()
     {
-        // Reproducir animación inicial
         animacionObjeto.Play(animacionInicial);
 
-        // Esperar a que termine la animación inicial
         AnimatorStateInfo stateInfo;
         do
         {
             yield return null;
             stateInfo = animacionObjeto.GetCurrentAnimatorStateInfo(0);
-        } while (stateInfo.IsName(animacionInicial) && stateInfo.normalizedTime < 1f);
+        }
+        while (stateInfo.IsName(animacionInicial) && stateInfo.normalizedTime < 1f);
 
-        // Reproducir animación final
         animacionObjeto.Play(animacionFinal);
-        Debug.Log("Animación final reproducida: puerta abierta permanentemente.");
+        Debug.Log("Animación final reproducida: puerta abierta.");
     }
 }
