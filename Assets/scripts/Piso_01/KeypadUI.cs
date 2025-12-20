@@ -17,7 +17,7 @@ public class KeypadUI : MonoBehaviour
     public GameObject mensajeIncorrecto;
 
     [Header("Animaciones")]
-    public Animator animacionObjeto; // Asignar en inspector
+    public Animator animacionObjeto;
     public string animacionInicial = "PuertaFinal";
     public string animacionFinal = "PuertaAbierta";
 
@@ -25,9 +25,9 @@ public class KeypadUI : MonoBehaviour
     public bool teclaColocada = false;
 
     [Header("Sonidos")]
-    public AudioSource audioSource;        // AudioSource del objeto
-    public AudioClip sonidoCorrecto;       // Sonido al acertar
-    public AudioClip sonidoIncorrecto;     // Sonido al fallar
+    public AudioSource audioSource;
+    public AudioClip sonidoCorrecto;
+    public AudioClip sonidoIncorrecto;
 
     private string codigoActual = "";
     private bool animacionReproducida = false;
@@ -45,7 +45,6 @@ public class KeypadUI : MonoBehaviour
 
     void LeerTecladoNumerico()
     {
-        // No permitir introducir código si la luz está apagada
         if (controladorLuces != null && GameManagerGlobal.Instance.lucesApagadas)
             return;
 
@@ -110,6 +109,5 @@ public class KeypadUI : MonoBehaviour
         while (stateInfo.IsName(animacionInicial) && stateInfo.normalizedTime < 1f);
 
         animacionObjeto.Play(animacionFinal);
-        Debug.Log("Animación final reproducida: puerta abierta.");
     }
 }
