@@ -15,6 +15,8 @@ public class scr_ObjetoBloqueador : MonoBehaviour
         Maletin
     }
 
+    public bool cuadroActivado = false;
+
     [Header("Tipo de Objeto")]
     [SerializeField] private TipoInteraccion tipoInteraccion = TipoInteraccion.Puerta;
 
@@ -175,19 +177,16 @@ public class scr_ObjetoBloqueador : MonoBehaviour
     //Comportamiento para cuerdas
     void CuerdaEjecucion()
     {
+        Debug.Log("CUADRO ACTIVADO");
+        cuadroActivado = true;
         // Reproducir animación si existe
-        if (miAnimator != null)
+        /*if (miAnimator != null)
         {
             miAnimator.SetTrigger(activaTrigger);
-        }
-        else
-        {
-            // Si no hay animación, simplemente desactivar
-            gameObject.SetActive(false);
-        }
-
-
-    
+        }*/
+        // Si no hay animación, simplemente desactivar
+        //gameObject.SetActive(false);
+            //gameObject.GetComponent<CuadroRoto>().breakPainting();
 
         // AQUÍ se debe añadir la lógica. Actualmente es un ejemplo en el que objeto desaparece,
         // sin embargo, eso dependera del tipo de objeto que tengamos y como queremos que funcione

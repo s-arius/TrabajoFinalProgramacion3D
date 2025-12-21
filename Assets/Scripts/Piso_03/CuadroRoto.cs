@@ -5,6 +5,7 @@ public class CuadroRoto : MonoBehaviour
 {
     GameObject cuadro;
     GameObject cuadroRoto;
+    public scr_ObjetoBloqueador bloq;
     Renderer[] cuadroRenderer;
 
     float timer = 0f;
@@ -21,6 +22,8 @@ public class CuadroRoto : MonoBehaviour
 
     public float appearSpeed =9f; 
     bool isMoving = false;
+
+
 
     void Start()
     {
@@ -52,7 +55,7 @@ public class CuadroRoto : MonoBehaviour
         }
     }
 
-    void SetRenderers(bool value)
+    public void SetRenderers(bool value)
     {
         foreach (Renderer r in cuadroRenderer)
         {
@@ -61,9 +64,10 @@ public class CuadroRoto : MonoBehaviour
     }
 
 
-    void breakPainting()
+    public void breakPainting()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !waiting)
+        //if (Input.GetKeyDown(KeyCode.Space) && !waiting)
+        if(bloq.cuadroActivado==true && !waiting)
         {
             waiting = true;
             timer = 0f;
