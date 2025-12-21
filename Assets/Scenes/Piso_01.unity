@@ -515,7 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4d159f7a94bb4c4f902112e8cabd8ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  codigoCorrecto: 1234
+  codigoCorrecto: 4209
   jugador: {fileID: 551655903}
   controladorLuces: {fileID: 1282800624}
   mensajeCorrecto: {fileID: 0}
@@ -690,6 +690,8 @@ MonoBehaviour:
   lucesApagadas: 0
   teclaColocada: 0
   objetoVisible: 0
+  llaveRecogida: 0
+  maletinAbierto: 0
 --- !u!4 &100004839
 Transform:
   m_ObjectHideFlags: 0
