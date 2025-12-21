@@ -4,10 +4,11 @@ public class Maletin : MonoBehaviour
 {
     public GameObject maletinCerrado;
     public GameObject maletinAbierto;
-   // public AudioSource sonidoCerrado;
-    //public AudioSource sonidoAbierto;
     
     private bool jugadorCerca = false;
+
+    //llamar script de objeto bloqueador
+    public scr_ObjetoBloqueador block;
     
     void Start()
     {
@@ -17,12 +18,19 @@ public class Maletin : MonoBehaviour
     
     void Update()
     {
+        /*
         if (jugadorCerca && Input.GetKeyDown(KeyCode.E))
         {
-            IntentarAbrir();
         }
+
+        */
+
+                    AbrirMaletin();
+
     }
     
+
+    /*
     void IntentarAbrir()
     {
         if (GameManagerGlobal.Instance.maletinAbierto) return;
@@ -38,16 +46,23 @@ public class Maletin : MonoBehaviour
             Debug.Log("Necesitas la llave");
         }
     }
+
+    */
     
     void AbrirMaletin()
     {
+         if (block.maletinActivado) {
         GameManagerGlobal.Instance.maletinAbierto = true;
         maletinCerrado.SetActive(false);
         maletinAbierto.SetActive(true);
+                Debug.Log("maletin abierto en script maletin");
+         }
+
+
         
-        Debug.Log("Maletín abierto");
+
     }
-    
+    /*
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -65,5 +80,5 @@ public class Maletin : MonoBehaviour
         }
         }
 
-        
+        */
 }

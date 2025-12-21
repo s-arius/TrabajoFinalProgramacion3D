@@ -47,11 +47,14 @@ public class scr_ObjetoBloqueador : MonoBehaviour
     //private Transform playerTransform;
     private bool enRango = false;
     private bool estaActivada = false;
+    
     //private float mensajeTimer = 0f;
 
 
     // referencia codigos
-    private Maletin codigoMaletin;
+   // private Maletin codigoMaletin;
+    public bool maletinActivado = false;
+
 
 
 
@@ -204,20 +207,12 @@ public class scr_ObjetoBloqueador : MonoBehaviour
     
    void MaletinEjecucion()
 {
-    if (codigoMaletin != null)
-    {
-        // Forzar que el maletín se abra (ya sabemos que tiene la llave)
-        //codigoMaletin.AbrirMaletin();
+   
         Debug.Log("Maletín abierto a través de scr_ObjetoBloqueador");
         
-        // Opcional: Desactivar este script para que no se pueda interactuar más
-        // estaActivada = true;
+        maletinActivado = true;
         // panelInteractuar.SetActive(false);
-    }
-    else
-    {
-        Debug.LogError("No hay referencia al script Maletin asignada!");
-    }
-}
 
+
+}
 }

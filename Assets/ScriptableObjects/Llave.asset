@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Llave
   m_EditorClassIdentifier: 
   nombre: Llave Dorada
-  investigationPrefab: {fileID: 9193350898495762498, guid: d1242d9ebb334124db4151a514d91e90, type: 3}
+  investigationPrefab: {fileID: 1549234346621218679, guid: d3de793b3520bc14a97618fb404fcb4f, type: 3}
   icono: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  pensamiento: "Ejemplo: \xA1Que llave tan bacana! me pregunto que puerta abrir\xE1"
+  pensamiento: una llave!!!
