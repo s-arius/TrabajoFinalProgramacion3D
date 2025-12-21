@@ -3961,15 +3961,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.050384644, y: 0.065434724, z: 0.30376115}
   m_Center: {x: -0.0022919623, y: -0.00013894777, z: 0.15188058}
-<<<<<<< Updated upstream
 --- !u!1 &1122195390
-=======
-<<<<<<< HEAD
---- !u!1 &1132790017
-=======
---- !u!1 &1122195390
->>>>>>> cec12085071ccd2f841a4caac417b47c236ec6f2
->>>>>>> Stashed changes
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3977,23 +3969,6 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-  - component: {fileID: 1132790018}
-  - component: {fileID: 1132790020}
-  - component: {fileID: 1132790019}
-  m_Layer: 5
-  m_Name: Slot_001
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!224 &1132790018
-RectTransform:
-=======
->>>>>>> Stashed changes
   - component: {fileID: 1122195391}
   - component: {fileID: 1122195393}
   - component: {fileID: 1122195392}
@@ -4006,33 +3981,10 @@ RectTransform:
   m_IsActive: 1
 --- !u!4 &1122195391
 Transform:
-<<<<<<< Updated upstream
-=======
->>>>>>> cec12085071ccd2f841a4caac417b47c236ec6f2
->>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1132790017}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1870748010}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 25, y: -25}
-  m_SizeDelta: {x: 25, y: 25}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1132790019
-=======
->>>>>>> Stashed changes
   m_GameObject: {fileID: 1122195390}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -4043,46 +3995,11 @@ Transform:
   m_Father: {fileID: 610960165}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1122195392
-<<<<<<< Updated upstream
-=======
->>>>>>> cec12085071ccd2f841a4caac417b47c236ec6f2
->>>>>>> Stashed changes
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1132790017}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &1132790020
-CanvasRenderer:
-=======
->>>>>>> Stashed changes
   m_GameObject: {fileID: 1122195390}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -4102,21 +4019,10 @@ CanvasRenderer:
   m_SoftShadowQuality: 0
 --- !u!108 &1122195393
 Light:
-<<<<<<< Updated upstream
-=======
->>>>>>> cec12085071ccd2f841a4caac417b47c236ec6f2
->>>>>>> Stashed changes
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-  m_GameObject: {fileID: 1132790017}
-  m_CullTransparentMesh: 1
-=======
->>>>>>> Stashed changes
   m_GameObject: {fileID: 1122195390}
   m_Enabled: 1
   serializedVersion: 11
@@ -4176,10 +4082,6 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
-<<<<<<< Updated upstream
-=======
->>>>>>> cec12085071ccd2f841a4caac417b47c236ec6f2
->>>>>>> Stashed changes
 --- !u!1 &1174818938 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5944884353484478446, guid: 622304aa999256b499fdef36f593bff3, type: 3}
@@ -8995,17 +8897,4 @@ SceneRoots:
   - {fileID: 2114650478}
   - {fileID: 520747074}
   - {fileID: 353748496}
-<<<<<<< Updated upstream
   - {fileID: 610960165}
-=======
-<<<<<<< HEAD
-  - {fileID: 1221823168}
-  - {fileID: 7315236239321497052}
-  - {fileID: 1553575466}
-  - {fileID: 226167421}
-  - {fileID: 624918234}
-  - {fileID: 3352581114326696405}
-=======
-  - {fileID: 610960165}
->>>>>>> cec12085071ccd2f841a4caac417b47c236ec6f2
->>>>>>> Stashed changes
