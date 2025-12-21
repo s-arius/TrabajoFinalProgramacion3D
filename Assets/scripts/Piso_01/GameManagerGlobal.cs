@@ -10,6 +10,10 @@ public class GameManagerGlobal : MonoBehaviour
     public bool lucesApagadas = false;   // true si la luz ya fue apagada
     public bool teclaColocada = false;   // true si la tecla ya se colocó
     public bool objetoVisible = false;   // true si el objeto ya apareció
+    public bool llaveRecogida = false;
+    public bool maletinAbierto = false;
+
+
 
     private void Awake()
     {

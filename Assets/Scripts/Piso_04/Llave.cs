@@ -2,21 +2,29 @@ using UnityEngine;
 
 public class Llave : MonoBehaviour
 {
+
+    void Start()
+    {
+        if (GameManagerGlobal.Instance.llaveRecogida)
+        {
+            gameObject.SetActive(false);
+
+
+        }
+    }
+
+    void Update()
+    {
+        
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-       
-            Inventario inventario = other.GetComponent<Inventario>();
-            
-            if (inventario != null)
-            {
-                inventario.AddItem("llave");
-                Destroy(gameObject);
-            }
-            else
-            {
-            }
+            GameManagerGlobal.Instance.llaveRecogida = true;
+            gameObject.SetActive(false);
+            Debug.Log("has recogido una llave");
         }
     }
 }

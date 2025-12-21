@@ -208,7 +208,7 @@ public class scr_ObjetoBloqueador : MonoBehaviour
     if (codigoMaletin != null)
     {
         // Forzar que el maletín se abra (ya sabemos que tiene la llave)
-        codigoMaletin.AbrirMaletin();
+        //codigoMaletin.AbrirMaletin();
         Debug.Log("Maletín abierto a través de scr_ObjetoBloqueador");
         
         // Opcional: Desactivar este script para que no se pueda interactuar más

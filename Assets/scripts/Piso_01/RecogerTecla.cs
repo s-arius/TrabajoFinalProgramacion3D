@@ -2,33 +2,58 @@ using UnityEngine;
 
 public class RecogerTecla : MonoBehaviour
 {
-    private void Start()
+
+    private bool jugadorCerca = false;
+    
+    void Start()
     {
-        // Si la tecla ya fue recogida en otra escena, la desactivamos
-        if (GameManagerGlobal.Instance.teclaRecogida)
+        //gameObject.SetActive(false);
+    }
+    
+    void Update()
+    {
+
+        if (!GameManagerGlobal.Instance.maletinAbierto) 
+        return;
+        
+        if (jugadorCerca && Input.GetKeyDown(KeyCode.E))
         {
-            gameObject.SetActive(false);
+            Recoger();
+
+
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    
+    void Recoger()
     {
-        if (!other.CompareTag("Player"))
-            return;
+        if (GameManagerGlobal.Instance.teclaRecogida) return;
+        
+        GameManagerGlobal.Instance.teclaRecogida = true;
+        
 
-        Player player = other.GetComponent<Player>();
+            
+        gameObject.SetActive(false);
 
-        if (player != null && !GameManagerGlobal.Instance.teclaRecogida)
+        Debug.Log("tecla recogida");
+    }
+
+    
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
         {
-            player.tengoTecla = true;
+            jugadorCerca = true;
 
-            // Guardamos el estado global para que no reaparezca
-            GameManagerGlobal.Instance.teclaRecogida = true;
-
-            // Desactivamos la tecla en el mundo
-            gameObject.SetActive(false);
-
-            Debug.Log("Tecla recogida. Ahora el jugador la tiene y no volverá a aparecer.");
         }
+    }
+    
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            jugadorCerca = false;
+        }
+
     }
 }

@@ -2,31 +2,70 @@ using UnityEngine;
 
 public class Nota : MonoBehaviour
 {
-    public Texture2D imagenNota;
-    private bool viendoNota = false;
+    public GameObject panelNota;
+    private bool jugadorCerca = false;
+    private bool notaAbierta = false;
     
 
-    /*
+
+    void Start()
+    {
+        if (panelNota != null)
+            panelNota.SetActive(false);
+
+    }
+    
+    void Update()
+    {
+        if (!GameManagerGlobal.Instance.maletinAbierto) 
+        return;
+        
+        if (jugadorCerca && Input.GetKeyDown(KeyCode.E))
+        {
+            if (!notaAbierta)
+
+                AbrirNota();
+
+            else
+                CerrarNota();
+        }
+        
+
+
+        if (notaAbierta && Input.GetKeyDown(KeyCode.Escape))
+        {
+            CerrarNota();
+        }
+    }
+    
+    void AbrirNota()
+    {
+        notaAbierta = true;
+        if (panelNota != null) panelNota.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+
+    }
+    
+    void CerrarNota()
+    {
+        notaAbierta = false;
+        if (panelNota != null) panelNota.SetActive(false);
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+
+    }
+    
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log(" e para leer la nota");
-        }
-    }
-
-    */
-    
-    void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.F))
-        {
-            if (!viendoNota)
-            {
-
-                viendoNota = true;
-                
-            }
+            jugadorCerca = true;
+            Debug.Log("E para leer nota");
         }
     }
     
@@ -34,7 +73,10 @@ public class Nota : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            viendoNota = false;
+            jugadorCerca = false;
+            if (notaAbierta) CerrarNota();
+
+
         }
-    }
+}
 }

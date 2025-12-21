@@ -13,6 +13,8 @@ public class MenuPausa : MonoBehaviour
     public KeyCode teclaPausa = KeyCode.Escape;
     
     private bool juegoPausado = false;
+
+    private FPSController fpsController;
     
     void Start()
     {
@@ -24,6 +26,14 @@ public class MenuPausa : MonoBehaviour
             
         if (botonSalir != null)
             botonSalir.onClick.AddListener(SalirDelJuego);
+
+
+//para rotacion camara con el raton
+    GameObject jugador = GameObject.FindGameObjectWithTag("Player");
+        if (jugador != null)
+        {
+            fpsController = jugador.GetComponent<FPSController>();
+        }
     }
     
 
@@ -47,9 +57,8 @@ public class MenuPausa : MonoBehaviour
         
         //Time.timeScale = juegoPausado ? 0f : 1f; //pausar tiempo del juego
         
-        Cursor.lockState = juegoPausado ? CursorLockMode.None : CursorLockMode.Locked;
+         Cursor.lockState = juegoPausado ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = juegoPausado;
-        
 
         JugadorQuieto(juegoPausado);
         
@@ -84,15 +93,20 @@ public class MenuPausa : MonoBehaviour
     {
         GameObject jugador = GameObject.FindGameObjectWithTag("Player");
         
-        if (jugador != null)
+  if (jugador != null)
         {
+            // 1. Bloquear CharacterController (movimiento)
             CharacterController controller = jugador.GetComponent<CharacterController>();
             if (controller != null)
             {
                 controller.enabled = !bloquear;
             }
-   
             
+            // 2. Bloquear FPSController (movimiento Y ROTACIÓN de cámara)
+            if (fpsController != null)
+            {
+                fpsController.enabled = !bloquear;
+            }
         }
     }
  

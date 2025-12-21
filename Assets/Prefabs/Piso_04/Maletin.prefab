@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipoInteraccion: 0
-  ItemNecesario: {fileID: 11400000, guid: bc018bf77db89824da4d0b154a2a22f2, type: 2}
+  ItemNecesario: {fileID: 11400000, guid: 16c9304487588dd44b97b641575f8cd1, type: 2}
   mensajeSinItem: 'Ejemplo: Necesitas un objeto para interactuar'
   mensajeConItem: 'Ejemplo: Objeto desbloqueado'
   Tecla_deInteraccion: 101
