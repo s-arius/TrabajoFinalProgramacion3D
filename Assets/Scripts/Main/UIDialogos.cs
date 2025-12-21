@@ -8,6 +8,11 @@ public class UIDialogos : MonoBehaviour
     public GameObject uiObject;
     public float displayTime = 2f;
 
+    [Header("Audio")]
+    public AudioClip audioClip;      // Clip de audio que quieres reproducir
+    public float audioVolume = 1f;   // Volumen del audio
+    private AudioSource audioSource;
+
     private bool isShowing = false;
 
     void Awake()
@@ -15,6 +20,11 @@ public class UIDialogos : MonoBehaviour
         // APAGAR LA UI SIEMPRE, ANTES DE START
         if (uiObject != null)
             uiObject.SetActive(false);
+
+        // Crear AudioSource si no existe
+        audioSource = gameObject.GetComponent<AudioSource>();
+        if (audioSource == null)
+            audioSource = gameObject.AddComponent<AudioSource>();
     }
 
     void Start()
@@ -31,6 +41,12 @@ public class UIDialogos : MonoBehaviour
         if (isShowing) return;
         if (!other.CompareTag("Player")) return;
         if (GameManager.Instance.WasUIShown(uiID)) return;
+
+        // Reproducir el audio si hay clip asignado
+        if (audioClip != null)
+        {
+            audioSource.PlayOneShot(audioClip, audioVolume);
+        }
 
         StartCoroutine(ShowUIRoutine());
     }

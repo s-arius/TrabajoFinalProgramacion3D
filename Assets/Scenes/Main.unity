@@ -37259,7 +37259,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiID: 95
   uiObject: {fileID: 1590222196}
-  displayTime: 3
+  displayTime: 4
+  audioClip: {fileID: 8300000, guid: 91635f5cc4168484cb17db986a83353c, type: 3}
+  audioVolume: 1
 --- !u!65 &952407848
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -57394,6 +57396,75 @@ Transform:
   - {fileID: 1202917199}
   m_Father: {fileID: 548503056}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1487903172
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: bf96fc6b40cb14c40a68db92f7feb1d0, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.1800816
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bf96fc6b40cb14c40a68db92f7feb1d0, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.99647033
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bf96fc6b40cb14c40a68db92f7feb1d0, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.7342161
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bf96fc6b40cb14c40a68db92f7feb1d0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.26
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bf96fc6b40cb14c40a68db92f7feb1d0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -38.26
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bf96fc6b40cb14c40a68db92f7feb1d0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.79
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bf96fc6b40cb14c40a68db92f7feb1d0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bf96fc6b40cb14c40a68db92f7feb1d0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bf96fc6b40cb14c40a68db92f7feb1d0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bf96fc6b40cb14c40a68db92f7feb1d0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bf96fc6b40cb14c40a68db92f7feb1d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bf96fc6b40cb14c40a68db92f7feb1d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: bf96fc6b40cb14c40a68db92f7feb1d0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bf96fc6b40cb14c40a68db92f7feb1d0, type: 3}
+      propertyPath: m_Name
+      value: glass
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: bf96fc6b40cb14c40a68db92f7feb1d0, type: 3}
 --- !u!1 &1492145666
 GameObject:
   m_ObjectHideFlags: 0
@@ -69199,7 +69270,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiID: 93
   uiObject: {fileID: 816707634}
-  displayTime: 3
+  displayTime: 4
+  audioClip: {fileID: 8300000, guid: a380b07cb8771f54ab0820de3296d55d, type: 3}
+  audioVolume: 1
 --- !u!65 &1949347915
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -70324,7 +70397,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiID: 98
   uiObject: {fileID: 1067135752}
-  displayTime: 3
+  displayTime: 4
+  audioClip: {fileID: 8300000, guid: 05266cd75f1950f44b3ce00eb843fd8a, type: 3}
+  audioVolume: 1
 --- !u!65 &2029123477
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -72086,3 +72161,4 @@ SceneRoots:
   - {fileID: 570436750}
   - {fileID: 1709681041}
   - {fileID: 1869908075}
+  - {fileID: 1487903172}
