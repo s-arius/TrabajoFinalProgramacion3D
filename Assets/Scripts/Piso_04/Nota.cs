@@ -3,24 +3,28 @@ using UnityEngine;
 public class Nota : MonoBehaviour
 {
     public Texture2D imagenNota;
-    private bool mostrando = false;
+    private bool viendoNota = false;
     
+
+    /*
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Pulsa F para leer la nota");
+            Debug.Log(" e para leer la nota");
         }
     }
+
+    */
     
     void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && Input.GetKeyDown(KeyCode.F))
         {
-            if (!mostrando)
+            if (!viendoNota)
             {
 
-                mostrando = true;
+                viendoNota = true;
                 
             }
         }
@@ -30,7 +34,7 @@ public class Nota : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            mostrando = false;
+            viendoNota = false;
         }
     }
 }

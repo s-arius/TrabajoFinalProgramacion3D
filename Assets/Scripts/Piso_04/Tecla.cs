@@ -10,7 +10,7 @@ public class Tecla : MonoBehaviour
     
     void Start()
     {
-        inventario = FindObjectOfType<Inventario>();
+inventario = FindFirstObjectByType<Inventario>();
 
     }
     

@@ -48,6 +48,10 @@ public class scr_ObjetoBloqueador : MonoBehaviour
     //private float mensajeTimer = 0f;
 
 
+    // referencia codigos
+    private Maletin codigoMaletin;
+
+
 
     void Start()
     {
@@ -106,11 +110,11 @@ public class scr_ObjetoBloqueador : MonoBehaviour
                 CuerdaEjecucion();
                 break;
 
-        /*
+        
             case TipoInteraccion.Maletin:
                 MaletinEjecucion();
                 break;
-        */
+        
         }
 
 
@@ -198,15 +202,23 @@ public class scr_ObjetoBloqueador : MonoBehaviour
         //En pocas palabras, las funciones de comportamiento son lo que diferencian una puerta de un cuadro que cae.
     }
 
-    /*
-        void MaletinEjecucion()
-                {
-            //maletinCerrado.SetActive(false);
-            //maletinAbierto.SetActive(true);
-        //llamar al script de maletin directamente
+    
+   void MaletinEjecucion()
+{
+    if (codigoMaletin != null)
+    {
+        // Forzar que el maletín se abra (ya sabemos que tiene la llave)
+        codigoMaletin.AbrirMaletin();
+        Debug.Log("Maletín abierto a través de scr_ObjetoBloqueador");
+        
+        // Opcional: Desactivar este script para que no se pueda interactuar más
+        // estaActivada = true;
+        // panelInteractuar.SetActive(false);
+    }
+    else
+    {
+        Debug.LogError("No hay referencia al script Maletin asignada!");
+    }
+}
 
-
-        }
-
-*/
 }
