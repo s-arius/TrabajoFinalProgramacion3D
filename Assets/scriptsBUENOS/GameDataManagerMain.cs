@@ -17,6 +17,12 @@ public class GameManager : MonoBehaviour
     [Header("Cristales limpiados")]
     public HashSet<string> cleanedCrystals = new HashSet<string>();
 
+    // =========================
+    // UI MOSTRADAS (NUEVO)
+    // =========================
+    [Header("UI mostradas")]
+    public HashSet<string> shownUIs = new HashSet<string>();
+
     void Awake()
     {
         if (Instance == null)
@@ -31,6 +37,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    // =========================
+    // CRISTALES (SIN TOCAR)
+    // =========================
     public void RegisterCleanedCrystal(string crystalID)
     {
         if (!cleanedCrystals.Contains(crystalID))
@@ -40,5 +49,19 @@ public class GameManager : MonoBehaviour
     public bool IsCrystalCleaned(string crystalID)
     {
         return cleanedCrystals.Contains(crystalID);
+    }
+
+    // =========================
+    // UI MOSTRADAS (NUEVO)
+    // =========================
+    public void RegisterUIShown(string uiID)
+    {
+        if (!shownUIs.Contains(uiID))
+            shownUIs.Add(uiID);
+    }
+
+    public bool WasUIShown(string uiID)
+    {
+        return shownUIs.Contains(uiID);
     }
 }
