@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b889b74ce7f4df46b57ba63b21b2187, type: 3}
-  m_Name: Llave
+  m_Name: Tecla
   m_EditorClassIdentifier: 
-  nombre: Llave Dorada
-  investigationPrefab: {fileID: 1549234346621218679, guid: d3de793b3520bc14a97618fb404fcb4f, type: 3}
+  nombre: tecla
+  investigationPrefab: {fileID: 5932748942988033458, guid: 92930789d4701d44b83c3289465d1d98, type: 3}
   icono: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  pensamiento: Has encontrado una llave
+  pensamiento: Has encontrado una tecla

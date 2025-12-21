@@ -15,4 +15,4 @@ MonoBehaviour:
   nombre: Maletin Cerrado
   investigationPrefab: {fileID: 4244000354460071470, guid: e840b562e1f371f409d97dc4b1b10389, type: 3}
   icono: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  pensamiento: lalala un maletin
+  pensamiento: "Un malet\xEDn..."

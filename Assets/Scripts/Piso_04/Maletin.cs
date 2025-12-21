@@ -18,14 +18,12 @@ public class Maletin : MonoBehaviour
     
     void Update()
     {
-        /*
-        if (jugadorCerca && Input.GetKeyDown(KeyCode.E))
+
+
+        if (block != null && block.maletinActivado && !GameManagerGlobal.Instance.maletinAbierto)
         {
+            AbrirMaletin();
         }
-
-        */
-
-                    AbrirMaletin();
 
     }
     
@@ -51,12 +49,10 @@ public class Maletin : MonoBehaviour
     
     void AbrirMaletin()
     {
-         if (block.maletinActivado) {
-        GameManagerGlobal.Instance.maletinAbierto = true;
+       GameManagerGlobal.Instance.maletinAbierto = true;
         maletinCerrado.SetActive(false);
         maletinAbierto.SetActive(true);
-                Debug.Log("maletin abierto en script maletin");
-         }
+        Debug.Log("Maletín abierto automáticamente");
 
 
         

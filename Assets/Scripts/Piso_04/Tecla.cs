@@ -13,14 +13,10 @@ public class Tecla : MonoBehaviour
     void Update()
     {
 
-        if (!GameManagerGlobal.Instance.maletinAbierto) 
-        return;
-        
+        // Ahora solo verificar proximidad
         if (jugadorCerca && Input.GetKeyDown(KeyCode.E))
         {
             Recoger();
-
-
         }
     }
 

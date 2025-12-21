@@ -1,4 +1,3 @@
-// MenuPausa.cs
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,14 +37,24 @@ public class MenuPausa : MonoBehaviour
     
 
 
-    void Update()
+
+            void Update()
     {
+        if (Input.GetKeyDown(teclaPausa) && !modoInvestigacion())
+        {
+            TogglePausa();
+        }
+    }
+
+    /*
         if (Input.GetKeyDown(teclaPausa))
         {
             TogglePausa();
         }
 
-    }
+        */
+
+    
 
     
     void TogglePausa()
@@ -95,19 +104,29 @@ public class MenuPausa : MonoBehaviour
         
   if (jugador != null)
         {
-            // 1. Bloquear CharacterController (movimiento)
             CharacterController controller = jugador.GetComponent<CharacterController>();
             if (controller != null)
             {
                 controller.enabled = !bloquear;
             }
+
+        
             
-            // 2. Bloquear FPSController (movimiento Y ROTACIÓN de cámara)
             if (fpsController != null)
             {
                 fpsController.enabled = !bloquear;
             }
         }
+    }
+
+
+        private bool modoInvestigacion() //para que no overlapee el esc del modo investigacion
+    {
+        if (scr_ModoInvestigar.Instancia != null)
+        {
+            return scr_ModoInvestigar.Instancia.EstaInvestigando_Funcion();
+        }
+        return false;
     }
  
 

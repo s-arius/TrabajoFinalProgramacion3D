@@ -13,14 +13,9 @@ public class RecogerTecla : MonoBehaviour
     void Update()
     {
 
-        if (!GameManagerGlobal.Instance.maletinAbierto) 
-        return;
-        
         if (jugadorCerca && Input.GetKeyDown(KeyCode.E))
         {
             Recoger();
-
-
         }
     }
 
