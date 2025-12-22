@@ -22,8 +22,7 @@ public class RecogerTecla : MonoBehaviour
     
     void Recoger()
     {
-        if (GameManagerGlobal.Instance.teclaRecogida) 
-        return;
+        if (GameManagerGlobal.Instance.teclaRecogida) return;
         
         GameManagerGlobal.Instance.teclaRecogida = true;
         
