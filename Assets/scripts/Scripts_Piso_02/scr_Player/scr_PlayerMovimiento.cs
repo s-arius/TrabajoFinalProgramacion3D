@@ -1,7 +1,4 @@
-﻿using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.Rendering;
-using static UnityEditor.VersionControl.Asset;
+﻿using UnityEngine;
 
 public class scr_PlayerMovimiento : MonoBehaviour
 {
