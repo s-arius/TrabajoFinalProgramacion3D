@@ -9,6 +9,7 @@ TagManager:
   - Jabon
   - Panel_Interactuar
   - LuzApagable
+  - Caballo
   layers:
   - Default
   - TransparentFX

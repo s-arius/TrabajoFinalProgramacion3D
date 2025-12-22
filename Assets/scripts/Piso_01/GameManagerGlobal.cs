@@ -12,6 +12,7 @@ public class GameManagerGlobal : MonoBehaviour
     public bool objetoVisible = false;   // true si el objeto ya apareció
     public bool llaveRecogida = false;
     public bool maletinAbierto = false;
+    public bool caballoRecogido = false; //true si recogiste el caballo
 
 
 
