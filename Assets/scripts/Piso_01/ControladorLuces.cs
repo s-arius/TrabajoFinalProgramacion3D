@@ -7,7 +7,6 @@ public class ControladorLuces : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -28,7 +27,6 @@ public class ControladorLuces : MonoBehaviour
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    // Se llama AUTOMÁTICAMENTE cada vez que cargas una escena
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         AplicarEstadoLuces();

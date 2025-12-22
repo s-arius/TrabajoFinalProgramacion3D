@@ -16,7 +16,7 @@ public class Keypad : MonoBehaviour
     public GameObject mensajeIncorrecto;
 
     [Header("Estado de la llave")]
-    public bool teclaColocada = false; // true si ya se colocó la tecla
+    public bool teclaColocada = false;
 
     private string codigoActual = "";
 
@@ -36,11 +36,9 @@ public class Keypad : MonoBehaviour
 
     void LeerTecladoNumerico()
     {
-        // No permitir introducir código si la luz está apagada
         if (controladorLuces != null && GameManagerGlobal.Instance.lucesApagadas)
             return;
 
-        // Teclas del 1 al 9 (fila superior y keypad)
         for (int i = 1; i <= 9; i++)
         {
             if (Input.GetKeyDown(i.ToString()) || Input.GetKeyDown((KeyCode)((int)KeyCode.Keypad1 + i - 1)))

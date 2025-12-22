@@ -76,7 +76,6 @@ public class KeypadUI : MonoBehaviour
 
                 if (mensajeCorrecto != null) mensajeCorrecto.SetActive(true);
 
-                // 🔊 Sonido correcto
                 if (audioSource != null && sonidoCorrecto != null)
                     audioSource.PlayOneShot(sonidoCorrecto);
 

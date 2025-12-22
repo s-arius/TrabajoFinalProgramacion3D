@@ -12,14 +12,14 @@ public class ColocarTecla : MonoBehaviour
     public CamaraSeguir camara;
 
     [Header("Keypad UI")]
-    public GameObject canvasKeypadUI; // SOLO la UI del keypad
-    public KeypadUI keypadUI;         // Script del keypad
+    public GameObject canvasKeypadUI; 
+    public KeypadUI keypadUI;
 
     [Header("Objeto que aparece tras colocar la tecla")]
     public ObjetoVisibleTrasTecla objetoVisibleTrasTecla;
 
     [HideInInspector]
-    public bool teclaColocada = false; // Para otros scripts
+    public bool teclaColocada = false;
 
     private Player jugador;
     private bool jugadorCerca = false;
@@ -32,10 +32,8 @@ public class ColocarTecla : MonoBehaviour
         if (canvasKeypadUI != null)
             canvasKeypadUI.SetActive(false);
 
-        // Recuperamos estado global
         teclaColocada = GameManagerGlobal.Instance.teclaColocada;
 
-        // Si la tecla ya fue colocada, activamos el objeto automáticamente
         if (teclaColocada && objetoVisibleTrasTecla != null)
             objetoVisibleTrasTecla.Activar();
     }
@@ -55,24 +53,20 @@ public class ColocarTecla : MonoBehaviour
     void ColocarTeclaEnSlot()
     {
         teclaColocada = true;
-        GameManagerGlobal.Instance.teclaColocada = true; // ⚠ independiente de luces
+        GameManagerGlobal.Instance.teclaColocada = true;
 
-        // Apagar luces
         GameManagerGlobal.Instance.lucesApagadas = true;
         controladorLuces.ApagarLuces();
 
-        // Ocultar cartel y UI
         if (cartelColocarTecla != null)
             cartelColocarTecla.SetActive(false);
 
         if (canvasKeypadUI != null)
             canvasKeypadUI.SetActive(false);
 
-        // Actualizamos el estado en el keypad UI
         if (keypadUI != null)
             keypadUI.teclaColocada = true;
 
-        // Activamos el objeto que debe aparecer tras colocar la tecla
         if (objetoVisibleTrasTecla != null)
             objetoVisibleTrasTecla.Activar();
 

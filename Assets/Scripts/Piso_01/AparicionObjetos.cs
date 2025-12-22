@@ -4,13 +4,13 @@ using System.Collections;
 public class AparicionProgresivaObjetos : MonoBehaviour
 {
     [Header("Objetos a mostrar (4)")]
-    public GameObject[] objetos; // Deben ser 4
+    public GameObject[] objetos;
 
     [Header("Tiempo antes de desaparecer")]
     public float delayDesaparicion = 1f;
 
     private int indiceActual = 0;
-    private bool enProceso = false; // Evita pulsaciones durante el delay
+    private bool enProceso = false;
 
     void Start()
     {
@@ -43,7 +43,6 @@ public class AparicionProgresivaObjetos : MonoBehaviour
             objetos[indiceActual].SetActive(true);
             indiceActual++;
 
-            // Si acabamos de mostrar el último
             if (indiceActual == objetos.Length)
             {
                 StartCoroutine(DesaparecerConDelay());
