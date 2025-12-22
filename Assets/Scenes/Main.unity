@@ -69814,6 +69814,7 @@ MonoBehaviour:
   objetoVisible: 0
   llaveRecogida: 0
   maletinAbierto: 0
+  caballoRecogido: 0
 --- !u!114 &1975827644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69832,6 +69833,7 @@ MonoBehaviour:
   objetoVisible: 0
   llaveRecogida: 0
   maletinAbierto: 0
+  caballoRecogido: 0
 --- !u!1 &1977192409
 GameObject:
   m_ObjectHideFlags: 0
