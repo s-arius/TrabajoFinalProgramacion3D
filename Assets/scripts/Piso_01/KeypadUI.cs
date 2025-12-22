@@ -29,6 +29,8 @@ public class KeypadUI : MonoBehaviour
     public AudioClip sonidoCorrecto;
     public AudioClip sonidoIncorrecto;
 
+    [HideInInspector] public bool codigoCorrectoIntroducido = false;
+
     private string codigoActual = "";
     private bool animacionReproducida = false;
 
@@ -73,6 +75,8 @@ public class KeypadUI : MonoBehaviour
             if (codigoActual == codigoCorrecto)
             {
                 Debug.Log("Código correcto!");
+
+                codigoCorrectoIntroducido = true;
 
                 if (mensajeCorrecto != null) mensajeCorrecto.SetActive(true);
 

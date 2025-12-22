@@ -25,14 +25,19 @@ public class AparicionProgresivaObjetos : MonoBehaviour
 
     void DetectarNumero()
     {
-        for (int i = 0; i <= 9; i++)
+        for (int i = 1; i <= 9; i++)
         {
             if (Input.GetKeyDown(i.ToString()) ||
-                (i > 0 && Input.GetKeyDown((KeyCode)((int)KeyCode.Keypad0 + i))))
+                Input.GetKeyDown((KeyCode)((int)KeyCode.Keypad1 + i - 1)))
             {
                 MostrarSiguiente();
-                break;
+                return;
             }
+        }
+
+        if (Input.GetKeyDown("0") || Input.GetKeyDown(KeyCode.Keypad0))
+        {
+            MostrarSiguiente();
         }
     }
 

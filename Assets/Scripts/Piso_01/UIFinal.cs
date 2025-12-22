@@ -14,12 +14,13 @@ public class UIFinal : MonoBehaviour
     public float delayAntesFade = 2f;
     public float duracionFade = 1f;
 
-    [Header("Opciones")]
-    public bool ocultarAlSalir = false;
+    [Header("Keypad")]
+    public KeypadUI keypad;
 
+    private bool jugadorDentro = false;
     private bool yaActivado = false;
 
-    private void Start()
+    void Start()
     {
         if (ui != null)
             ui.SetActive(false);
@@ -32,28 +33,41 @@ public class UIFinal : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    void Update()
     {
-        if (!other.CompareTag("Player"))
-            return;
-
         if (yaActivado)
             return;
 
-        yaActivado = true;
-        StartCoroutine(ActivarUIConFade());
+        if (jugadorDentro && keypad != null && keypad.codigoCorrectoIntroducido)
+        {
+            yaActivado = true;
+            StartCoroutine(ActivarUIConFade());
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            jugadorDentro = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            jugadorDentro = false;
+        }
     }
 
     IEnumerator ActivarUIConFade()
     {
-        // Espera antes del fundido
         yield return new WaitForSeconds(delayAntesFade);
 
-        // Activar la UI
         if (ui != null)
             ui.SetActive(true);
 
-        // Fundido a blanco
         float tiempo = 0f;
         Color c = imagenFade.color;
 
@@ -67,14 +81,5 @@ public class UIFinal : MonoBehaviour
 
         c.a = 1f;
         imagenFade.color = c;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player") && ocultarAlSalir)
-        {
-            if (ui != null)
-                ui.SetActive(false);
-        }
     }
 }
