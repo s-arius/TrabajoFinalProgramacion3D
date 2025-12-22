@@ -35,8 +35,18 @@ Transform:
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
   m_LocalScale: {x: 6.48, y: 6.48, z: 6.48}
   m_ConstrainProportionsScale: 1
+=======
+  m_LocalScale: {x: 4.2456, y: 4.2456, z: 4.2456}
+  m_ConstrainProportionsScale: 0
+>>>>>>> Stashed changes
+=======
+  m_LocalScale: {x: 4.2456, y: 4.2456, z: 4.2456}
+  m_ConstrainProportionsScale: 0
+>>>>>>> Stashed changes
 =======
   m_LocalScale: {x: 4.2456, y: 4.2456, z: 4.2456}
   m_ConstrainProportionsScale: 0
