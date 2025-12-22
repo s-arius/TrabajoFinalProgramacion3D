@@ -373,6 +373,11 @@ MonoBehaviour:
     - m_ComponentGlyphIDs: 2b000000ba010000
       m_LigatureGlyphID: 726
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
     - m_ComponentGlyphIDs: 37000000a9000000
       m_LigatureGlyphID: 772
     - m_ComponentGlyphIDs: 37000000ba010000
@@ -405,6 +410,16 @@ MonoBehaviour:
       m_LigatureGlyphID: 1197
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     - m_ComponentGlyphIDs: 5d000000a9000000
       m_LigatureGlyphID: 692
     - m_ComponentGlyphIDs: 5d000000ad000000
@@ -416,6 +431,31 @@ MonoBehaviour:
     - m_ComponentGlyphIDs: 5d000000aa000000
       m_LigatureGlyphID: 1141
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+    - m_ComponentGlyphIDs: 4c000000ad000000
+      m_LigatureGlyphID: 1197
+>>>>>>> Stashed changes
+=======
+    - m_ComponentGlyphIDs: 4c000000ad000000
+      m_LigatureGlyphID: 1197
+>>>>>>> Stashed changes
+=======
+    - m_ComponentGlyphIDs: 4c000000ad000000
+      m_LigatureGlyphID: 1197
+>>>>>>> Stashed changes
+=======
+    - m_ComponentGlyphIDs: 4c000000ad000000
+      m_LigatureGlyphID: 1197
+>>>>>>> Stashed changes
+=======
+    - m_ComponentGlyphIDs: 4c000000ad000000
+      m_LigatureGlyphID: 1197
+>>>>>>> Stashed changes
 =======
     - m_ComponentGlyphIDs: 4c000000ad000000
       m_LigatureGlyphID: 1197
@@ -44958,6 +44998,11 @@ MonoBehaviour:
       m_FeatureLookupFlags: 0
     - m_FirstAdjustmentRecord:
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         m_GlyphIndex: 61
         m_GlyphValueRecord:
           m_XPlacement: 0
@@ -57920,6 +57965,16 @@ MonoBehaviour:
     - m_FirstAdjustmentRecord:
 =======
 >>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
         m_GlyphIndex: 93
         m_GlyphValueRecord:
           m_XPlacement: 0
@@ -58011,7 +58066,22 @@ MonoBehaviour:
       m_FeatureLookupFlags: 0
     - m_FirstAdjustmentRecord:
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
         m_GlyphIndex: 76
         m_GlyphValueRecord:
           m_XPlacement: 0
@@ -58042,6 +58112,21 @@ MonoBehaviour:
           m_YAdvance: 0
       m_FeatureLookupFlags: 0
     - m_FirstAdjustmentRecord:
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         m_GlyphIndex: 93
         m_GlyphValueRecord:
@@ -60083,7 +60168,22 @@ MonoBehaviour:
           m_YAdvance: 0
       m_FeatureLookupFlags: 0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
     - m_FirstAdjustmentRecord:
         m_GlyphIndex: 76
         m_GlyphValueRecord:
@@ -60219,6 +60319,21 @@ MonoBehaviour:
           m_XAdvance: 0
           m_YAdvance: 0
       m_FeatureLookupFlags: 0
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     m_MarkToBaseAdjustmentRecords: []
     m_MarkToMarkAdjustmentRecords: []

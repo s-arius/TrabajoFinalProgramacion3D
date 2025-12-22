@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Llave
   m_EditorClassIdentifier: 
   nombre: Llave Dorada
-  investigationPrefab: {fileID: 1549234346621218679, guid: d3de793b3520bc14a97618fb404fcb4f, type: 3}
+  investigationPrefab: {fileID: 919132149155446097, guid: a018dd78e9c11fa439534e665c312718, type: 3}
   icono: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   pensamiento: Has encontrado una llave
