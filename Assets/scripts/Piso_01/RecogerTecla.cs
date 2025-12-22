@@ -2,53 +2,30 @@ using UnityEngine;
 
 public class RecogerTecla : MonoBehaviour
 {
-
-    private bool jugadorCerca = false;
-    
-    void Start()
+    private void Start()
     {
-        //gameObject.SetActive(false);
-    }
-    
-    void Update()
-    {
-
-        if (jugadorCerca && Input.GetKeyDown(KeyCode.E))
+        if (GameManagerGlobal.Instance.teclaRecogida)
         {
-            Recoger();
+            gameObject.SetActive(false);
         }
     }
 
-    
-    void Recoger()
+    private void OnTriggerEnter(Collider other)
     {
-        if (GameManagerGlobal.Instance.teclaRecogida) return;
-        
-        GameManagerGlobal.Instance.teclaRecogida = true;
-        
+        if (!other.CompareTag("Player"))
+            return;
 
-            
-        gameObject.SetActive(false);
+        Player player = other.GetComponent<Player>();
 
-        Debug.Log("tecla recogida");
-    }
-
-    
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        if (player != null && !GameManagerGlobal.Instance.teclaRecogida)
         {
-            jugadorCerca = true;
+            player.tengoTecla = true;
 
-        }
-    }
-    
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            jugadorCerca = false;
-        }
+            GameManagerGlobal.Instance.teclaRecogida = true;
 
+            gameObject.SetActive(false);
+
+            Debug.Log("Tecla recogida.");
+        }
     }
 }

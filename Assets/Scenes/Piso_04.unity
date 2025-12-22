@@ -3621,8 +3621,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Texto de prueba
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5624,8 +5624,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Presiona "E" para interactuar
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -6276,8 +6276,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Texto de prueba
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
-  m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8620,7 +8620,7 @@ MonoBehaviour:
   tipoInteraccion: 2
   ItemNecesario: {fileID: 11400000, guid: 16c9304487588dd44b97b641575f8cd1, type: 2}
   mensajeSinItem: "Este malet\xEDn necesita una llave para abrirse"
-  mensajeConItem: "Has abierto el malet\xEDn con la llave"
+  mensajeConItem: "\xBFQu\xE9 hace aqu\xED una tecla?"
   Tecla_deInteraccion: 101
   panelMensaje: {fileID: 0}
   mensaje_Duracion: 2

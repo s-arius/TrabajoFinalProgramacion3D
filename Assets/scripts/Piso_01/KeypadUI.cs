@@ -56,6 +56,11 @@ public class KeypadUI : MonoBehaviour
                 PulsarNumero(i.ToString());
             }
         }
+
+        if (Input.GetKeyDown("0") || Input.GetKeyDown(KeyCode.Keypad0))
+        {
+            PulsarNumero("0");
+        }
     }
 
     void PulsarNumero(string valor)
@@ -87,7 +92,6 @@ public class KeypadUI : MonoBehaviour
 
                 if (mensajeIncorrecto != null) mensajeIncorrecto.SetActive(true);
 
-                // 🔊 Sonido incorrecto
                 if (audioSource != null && sonidoIncorrecto != null)
                     audioSource.PlayOneShot(sonidoIncorrecto);
             }
