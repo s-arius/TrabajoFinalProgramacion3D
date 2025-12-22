@@ -601,7 +601,6 @@ MonoBehaviour:
   animacionObjeto: {fileID: 7286343934120279469}
   animacionInicial: PuertaFinal
   animacionFinal: PuertaAbierta
-  teclaColocada: 0
   audioSource: {fileID: 66159590}
   sonidoCorrecto: {fileID: 8300000, guid: a1233d352d1aafb498d4f67bc7a42820, type: 3}
   sonidoIncorrecto: {fileID: 8300000, guid: c4b611a2d0558f640bc8d23657d492c3, type: 3}
@@ -1005,7 +1004,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &212916782
 BoxCollider:
   m_ObjectHideFlags: 0

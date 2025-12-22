@@ -15,11 +15,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Piso_02.unity
     guid: 1a816497e410f65428bc44a3a61a3200
   - enabled: 1
+    path: Assets/Scenes/Piso_03.unity
+    guid: 2a1eff1f66a756846b5d05dc0fb3487d
+  - enabled: 1
     path: Assets/Scenes/Piso_04.unity
     guid: e5c07dbf043243849ad6c428987ef45c
-  - enabled: 0
-    path: Assets/Scenes/Pruebas_Pablo/Piso_02_Prueba.unity
-    guid: c8c0a85080cdda642b415cf10b1846ba
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
