@@ -8981,10 +8981,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: MaletinCerrado
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       objectReference: {fileID: 0}
     - target: {fileID: 4244000354460071470, guid: e840b562e1f371f409d97dc4b1b10389, type: 3}
       propertyPath: m_IsActive
       value: 0
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
       objectReference: {fileID: 0}
@@ -9315,7 +9318,10 @@ SceneRoots:
   - {fileID: 7649019712298886076}
   - {fileID: 1014721798}
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   - {fileID: 366050525}
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
