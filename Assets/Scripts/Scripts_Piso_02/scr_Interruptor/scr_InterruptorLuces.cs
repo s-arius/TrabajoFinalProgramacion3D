@@ -5,7 +5,7 @@ public class scr_InterruptorLuces : MonoBehaviour
 
     [Header("Configuración")]
     [SerializeField] private KeyCode teclaInteraccion = KeyCode.E;
-    [SerializeField] private GameObject palancaVisual;
+    [SerializeField] private Animator animatorInterruptor;
 
     [Header("UI")]
     [SerializeField] private GameObject panel_Interactuar;
@@ -44,9 +44,13 @@ public class scr_InterruptorLuces : MonoBehaviour
 
     private void ActualizarVisualPalanca() //Incesario, solo incluye la animacion, no afecta la logica
     {
-        if (palancaVisual == null) return;
+        if (animatorInterruptor == null) return;
 
         bool lucesApagadas = GameManagerGlobal.Instance.lucesApagadas;
+
+        if (!lucesApagadas) animatorInterruptor.SetTrigger("ON_Interruptor");
+        else if(lucesApagadas) animatorInterruptor.SetTrigger("OFF_Interruptor");
+
         //palancaVisual.localRotation = Quaternion.Euler(lucesApagadas ? rotacionApagado : rotacionEncendido);
     }
 
