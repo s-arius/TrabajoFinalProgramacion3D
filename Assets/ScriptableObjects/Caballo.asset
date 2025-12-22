@@ -15,4 +15,4 @@ MonoBehaviour:
   nombre: caballo
   investigationPrefab: {fileID: 5391214104576471199, guid: ea678a93e8c54ef46ba5b12f91d22f59, type: 3}
   icono: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  pensamiento: "Ejemplo: \xA1Que llave tan bacana! me pregunto que puerta abrir\xE1"
+  pensamiento: Un caballo de ajedrez.

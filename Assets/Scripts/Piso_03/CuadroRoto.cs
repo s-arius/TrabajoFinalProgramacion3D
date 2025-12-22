@@ -5,6 +5,7 @@ public class CuadroRoto : MonoBehaviour
 {
     GameObject cuadro;
     GameObject cuadroRoto;
+    public GameObject llavecitas;
     public scr_ObjetoBloqueador bloq;
     Renderer[] cuadroRenderer;
 
@@ -12,7 +13,7 @@ public class CuadroRoto : MonoBehaviour
     bool waiting = false;
 
     bool isBlinking = false;
-    float delay = 1.5f;
+    float delay = 1f;
     float visibleTime = 2f;
     float blink = 0.5f;
     float blinkTimer = 0;
@@ -20,7 +21,7 @@ public class CuadroRoto : MonoBehaviour
     float offTime = 0.3f;
     bool isOff = false;
 
-    public float appearSpeed =9f; 
+    public float appearSpeed =2f; 
     bool isMoving = false;
 
 
@@ -29,7 +30,10 @@ public class CuadroRoto : MonoBehaviour
     {
         cuadro = transform.GetChild(0).gameObject;
         cuadroRoto = transform.GetChild(1).gameObject;
+        
         cuadroRoto.SetActive(false);
+        //llavecitas.SetActive(false);
+        llavecitas.GetComponent<Collider>().enabled = false;
         cuadroRenderer = cuadroRoto.GetComponentsInChildren<Renderer>();
 
         foreach (Renderer r in cuadroRenderer)
@@ -67,7 +71,7 @@ public class CuadroRoto : MonoBehaviour
     public void breakPainting()
     {
         //if (Input.GetKeyDown(KeyCode.Space) && !waiting)
-        if(bloq.cuadroActivado==true && !waiting)
+        if(bloq.cuadroActivado && !waiting)
         {
             waiting = true;
             timer = 0f;
@@ -81,7 +85,11 @@ public class CuadroRoto : MonoBehaviour
             {
                 cuadro.SetActive(false);
                 cuadroRoto.SetActive(true);
+                //llavecitas.SetActive(true);
+                llavecitas.GetComponent<Collider>().enabled = true;
+
                 SetRenderers(true);
+
                 isMoving = true;
 
         }
@@ -116,6 +124,7 @@ public class CuadroRoto : MonoBehaviour
                 isBlinking = false;
                 isOff = false;
                 blinkTimer = 0f;
+                Destroy(gameObject);
             }
         }
 

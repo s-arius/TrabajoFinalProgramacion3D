@@ -59,6 +59,13 @@ public class ItemDesbloqueador : MonoBehaviour
     // Recoge el objeto y activa el modo investigación
     void Recoger()
     {
+        if (gameObject.CompareTag("Caballo"))
+        {
+            if (GameManagerGlobal.Instance.caballoRecogido) return;
+
+            GameManagerGlobal.Instance.caballoRecogido = true;
+        }
+
         // Añadir al inventario
         InventoryManager.Instancia.agregarItem(itemData_SO);
 
@@ -68,6 +75,8 @@ public class ItemDesbloqueador : MonoBehaviour
         // Destruir el objeto del mundo
         Destroy(gameObject);
         panel_Interactuar.SetActive(false);
+
+
     }
 
 
