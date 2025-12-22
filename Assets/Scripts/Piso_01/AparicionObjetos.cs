@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class AparicionProgresivaObjetos : MonoBehaviour
+public class AparicionObjetos : MonoBehaviour
 {
     [Header("Objetos a mostrar (4)")]
     public GameObject[] objetos;
@@ -19,6 +19,9 @@ public class AparicionProgresivaObjetos : MonoBehaviour
 
     void Update()
     {
+        if (!GameManagerGlobal.Instance.teclaColocada)
+            return;
+
         if (!enProceso)
             DetectarNumero();
     }

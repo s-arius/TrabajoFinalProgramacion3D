@@ -64,9 +64,6 @@ public class ColocarTecla : MonoBehaviour
         if (canvasKeypadUI != null)
             canvasKeypadUI.SetActive(false);
 
-        if (keypadUI != null)
-            keypadUI.teclaColocada = true;
-
         if (objetoVisibleTrasTecla != null)
             objetoVisibleTrasTecla.Activar();
 

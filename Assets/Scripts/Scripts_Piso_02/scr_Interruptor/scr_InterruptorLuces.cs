@@ -3,7 +3,7 @@ using UnityEngine;
 public class scr_InterruptorLuces : MonoBehaviour
 {
 
-    [Header("Configuración")]
+    [Header("Configuraciï¿½n")]
     [SerializeField] private KeyCode teclaInteraccion = KeyCode.E;
     [SerializeField] private Animator animatorInterruptor;
 
@@ -23,7 +23,6 @@ public class scr_InterruptorLuces : MonoBehaviour
         if (!estaEnRango) return;
 
 
-        // Recoger objeto
         if (Input.GetKeyDown(teclaInteraccion))
         {
             AlternarLuces();
@@ -42,7 +41,7 @@ public class scr_InterruptorLuces : MonoBehaviour
         ActualizarVisualPalanca();
     }
 
-    private void ActualizarVisualPalanca() //Incesario, solo incluye la animacion, no afecta la logica
+    private void ActualizarVisualPalanca()
     {
         if (animatorInterruptor == null) return;
 
@@ -51,7 +50,6 @@ public class scr_InterruptorLuces : MonoBehaviour
         if (!lucesApagadas) animatorInterruptor.SetTrigger("ON_Interruptor");
         else if(lucesApagadas) animatorInterruptor.SetTrigger("OFF_Interruptor");
 
-        //palancaVisual.localRotation = Quaternion.Euler(lucesApagadas ? rotacionApagado : rotacionEncendido);
     }
 
     private void OnTriggerEnter(Collider other)

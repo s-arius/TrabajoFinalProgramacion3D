@@ -4,7 +4,7 @@ using System.Collections;
 public class KeypadUI : MonoBehaviour
 {
     [Header("Código correcto")]
-    public string codigoCorrecto = "1234";
+    public string codigoCorrecto = "4209";
 
     [Header("Jugador")]
     public Player jugador;
@@ -20,9 +20,6 @@ public class KeypadUI : MonoBehaviour
     public Animator animacionObjeto;
     public string animacionInicial = "PuertaFinal";
     public string animacionFinal = "PuertaAbierta";
-
-    [Header("Estado de la llave")]
-    public bool teclaColocada = false;
 
     [Header("Sonidos")]
     public AudioSource audioSource;
@@ -47,7 +44,13 @@ public class KeypadUI : MonoBehaviour
 
     void LeerTecladoNumerico()
     {
-        if (controladorLuces != null && GameManagerGlobal.Instance.lucesApagadas)
+        if (!GameManagerGlobal.Instance.teclaColocada)
+            return;
+
+        if (GameManagerGlobal.Instance.lucesApagadas)
+            return;
+
+        if (codigoCorrectoIntroducido)
             return;
 
         for (int i = 1; i <= 9; i++)
@@ -78,7 +81,8 @@ public class KeypadUI : MonoBehaviour
 
                 codigoCorrectoIntroducido = true;
 
-                if (mensajeCorrecto != null) mensajeCorrecto.SetActive(true);
+                if (mensajeCorrecto != null)
+                    mensajeCorrecto.SetActive(true);
 
                 if (audioSource != null && sonidoCorrecto != null)
                     audioSource.PlayOneShot(sonidoCorrecto);
@@ -93,7 +97,8 @@ public class KeypadUI : MonoBehaviour
             {
                 Debug.Log("Código incorrecto.");
 
-                if (mensajeIncorrecto != null) mensajeIncorrecto.SetActive(true);
+                if (mensajeIncorrecto != null)
+                    mensajeIncorrecto.SetActive(true);
 
                 if (audioSource != null && sonidoIncorrecto != null)
                     audioSource.PlayOneShot(sonidoIncorrecto);
