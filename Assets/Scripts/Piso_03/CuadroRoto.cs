@@ -48,7 +48,7 @@ public class CuadroRoto : MonoBehaviour
         if (isMoving)
         {
             // move forward in local z-axis
-            cuadroRoto.transform.Translate(Vector3.forward * appearSpeed * Time.deltaTime);
+            cuadroRoto.transform.Translate(Vector3.left * appearSpeed * Time.deltaTime);
 
             // optional: stop after moving a certain distance
             // e.g., move 1 unit forward
